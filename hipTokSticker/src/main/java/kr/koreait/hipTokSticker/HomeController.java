@@ -38,7 +38,7 @@ public class HomeController {
  */
 	@RequestMapping(value = "/", method = RequestMethod.GET)	
 	public String home(Locale locale, Model model) {
-		System.out.println("홈페이지 시작");
+		System.out.println("홈페이지 시이~작");
 		return "home";
 	}
 /**
