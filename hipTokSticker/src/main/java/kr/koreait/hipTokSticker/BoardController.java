@@ -30,7 +30,7 @@ import kr.koreait.vo.QnAVO;
  *   
  *  
  */
-
+qqqqqwqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
 @Controller
 public class BoardController {
 		
