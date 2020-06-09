@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.koreait.vo.BoardList;
+import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.MemberVO;
 import kr.koreait.vo.NoticeComment;
 import kr.koreait.vo.NoticeVO;
@@ -123,6 +124,21 @@ public interface HipTokDAO {
 
 
 
+
+	// 상품 업로드,등록
+	int selectCount1();
+
+	ArrayList<GoodsVO> ProductList(HashMap<String, Integer> hmap);
+
+	void commentIncrease(GoodsVO vo1);
+	void uploadDO(GoodsVO vo);
+	void listDO(GoodsVO vo);
+	void insertGoods(GoodsVO goodsVO);	//상품등록
+	int selectGoodsIdx();		//상품순서
+	
+	
+	void uploadFile(GoodsVO goodsVO);
+	
 
 
 

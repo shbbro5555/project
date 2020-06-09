@@ -57,7 +57,7 @@ bottom: 0%;
 </style>
 </head>
 <body>
-<div class="footer">
+<!-- <div class="footer">
   <div class="footer1">
 	    <h3>CUSTOMER SERVICE</h3>
 	    <h3>tue - fri / 2pm - 7pm&nbsp;</h3>
@@ -77,7 +77,7 @@ bottom: 0%;
 	    <h3> tue - sun / 2pm - 7pm / OFF&nbsp;</h3>
     </div> 
 </div>  
-
+ -->
 
 
 </body>
