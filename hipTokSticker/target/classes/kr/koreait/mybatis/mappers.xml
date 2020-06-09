@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.koreait.mybatis.HipTokDAO">
+
+
+	<!-- 회원가입 쿼리문 -->
+	<insert id="joinDO" parameterType="kr.koreait.vo.MemberVO">
+		insert into member(useridx, userid, userpassword, useremail, username, userPhoneNumber, useraddress, kind) 
+		values(member_seq.nextval, #{userId}, #{userPassword}, #{userEmail}, #{userName}, #{userPhoneNumber}, #{userAddress}, #{kind})
+	</insert>
+	
+	<!-- 로그인 쿼리문 (아이디와 비밀번호가 일치하는지)-->
+	<select id="loginDO" resultType="kr.koreait.vo.MemberVO" parameterType="kr.koreait.vo.MemberVO">
+		select * from member where userid = #{userId} and userpassword= #{userPassword}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="memberModifyDO" parameterType="kr.koreait.vo.MemberVO">
+		update member set 
+		userpassword = #{userPassword}, 
+		useremail = #{userEmail},
+		username = #{userName},
+		userPhoneNumber = #{userPhoneNumber},
+		useraddress = #{userAddress}
+		where userid = #{userId}
+	</update>
+	
+	<!-- 회원탈퇴 쿼리문 -->
+	<delete id="memberOutDO" parameterType="kr.koreait.vo.MemberVO">
+		delete member where userid = #{userId}
+	</delete>
+	
+<!-- ****************************************************************************************************************** -->
+<!-- ****************************************************************************************************************** -->
+	<!-- 공지글 몇건있는지 받아오기 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	<!-- 공지글 목록 받아오기 -->
+    <select id="noticeList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.NoticeVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from notice order by idx desc
+		   )AA where rownum <= #{endNO}
+		) where rnum >= #{startNO}
+		]]>   
+	</select>
+	
+	
+	
+	<!-- 공지사항 작성 -->
+	<insert id="noticeWriteDO" parameterType="kr.koreait.vo.NoticeVO">
+		insert into notice (idx, title, content, writer, userid)
+		values(notice_seq.nextval, #{title}, #{content}, #{writer}, #{userId})	
+	</insert>
+	
+	
+	
+	<!-- 공지글 조회수 증가 -->
+	<update id="noticeNOV" parameterType="int">
+		update notice set nov = nov+1 WHERE idx = #{idx}
+	</update>
+	
+	<!-- 공지사항 글 내용얻어오기 -->
+	<select id="noticeContentGO" resultType="kr.koreait.vo.NoticeVO" parameterType="kr.koreait.vo.NoticeVO">
+		select * from notice where idx = #{idx}	
+	</select>
+	
+	<!-- 공지글 댓글 목록 보여주기 -->
+	<select id="noticeComment" parameterType="kr.koreait.vo.NoticeComment" resultType="kr.koreait.vo.NoticeComment">
+		select * from noticeComment where main_idx = #{idx} order by idx desc
+	</select>
+	
+	<!-- 공지글 1건 삭제 -->
+	<delete id="noticeDelete" parameterType="kr.koreait.vo.NoticeVO">
+		delete notice where idx = #{idx}
+	</delete>
+	
+	<!-- 공지글에 있는 댓글 삭제 -->	
+	<delete id="noticeDelete2" parameterType="kr.koreait.vo.NoticeComment">
+		delete noticeComment where main_idx = #{idx}
+	</delete>
+
+	
+	<!-- 공지글 1건 수정 -->
+	<update id="noticeModify" parameterType="kr.koreait.vo.NoticeVO" >
+		update notice set 
+		title = #{title},
+		content = #{content}
+		where idx = #{idx}
+	</update>
+	
+	
+	<!-- 공지글 댓글 작성 -->
+	<insert id="noticeCommentDO" parameterType="kr.koreait.vo.NoticeComment">
+		insert into NOTICECOMMENT (idx, main_idx, content, userid)
+		values(noticecomment_seq.nextval, #{main_idx}, #{content}, #{userId})
+	</insert>
+
+	<!-- 공지글 댓글 개수 증가 -->
+	<update id="commentIncrease" parameterType="kr.koreait.vo.NoticeVO">
+		update notice set COMMENTNUMBER = COMMENTNUMBER + 1 where idx = #{idx}
+	</update>
+	
+	
+	<!-- 공지글 댓글 삭제 -->
+	<delete id="noticeCommentDelete" parameterType="kr.koreait.vo.NoticeComment">
+		delete noticeComment where idx = #{idx}
+	</delete>
+	
+	<!-- 공지글 댓글 개수 감소 -->
+	<update id="commentDecrease" parameterType="kr.koreait.vo.NoticeVO">
+		update notice set COMMENTNUMBER = COMMENTNUMBER - 1 where idx = #{main_idx}
+	</update>
+	
+	
+	<!--검색한 공지글 몇건있는지 받아오기 -->
+	<select id="selectCount2" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from notice
+		<if test ='searchType.equals("title")'>
+			where title like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("content")'>
+			where content like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("title_content")'>
+			where title like '%'||#{keyWord}||'%'
+				or content like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("writer")'>
+			where writer like '%'||#{keyWord}||'%'
+		</if>
+	</select>
+	
+	<!--검색한 공지글 목록 받아오기 -->
+    <select id="searchNotice" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.NoticeVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from notice where 
+		      ]]>
+		      	<if test ='searchType.equals("title")'>
+		      		title like '%'||#{keyWord}||'%'
+		      	</if>
+				<if test ='searchType.equals("content")'>
+					content like '%'||#{keyWord}||'%'
+				</if>
+				
+				<if test ='searchType.equals("title_content")'>
+					title like '%'||#{keyWord}||'%'
+					or content like '%'||#{keyWord}||'%'
+				</if>
+				
+				<if test ='searchType.equals("writer")'>
+					writer like '%'||#{keyWord}||'%'
+				</if>
+		      <![CDATA[
+			order by idx desc)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+	
+<!-- ****************************************************************************************************************** -->
+<!-- ****************************************************************************************************************** -->
+	<!-- QnA글 몇건있는지 받아오기 -->
+	<select id="selectCountQnA" resultType="int">
+		select count(*) from QNA
+	</select>
+	
+	<!-- QnA글 목록 받아오기 -->
+    <select id="qnaList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.QnAVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from QNA order by idx desc
+		   )AA where rownum <= #{endNO}
+		) where rnum >= #{startNO}
+		]]>   
+	</select>
+	
+	<!-- QnA 작성 -->
+	<insert id="QnAWriteDO" parameterType="kr.koreait.vo.QnAVO">
+		insert into QnA (idx, title, content, writer, userid, kind)
+		values(QnA_seq.nextval, #{title}, #{content}, #{writer}, #{userId}, #{kind})	
+	</insert>
+	
+	<!-- QnA글 조회수 증가 -->
+	<update id="QnANOV" parameterType="int">
+		update QnA set nov = nov+1 WHERE idx = #{idx}
+	</update>
+	
+	<!-- QnA글  내용얻어오기 -->
+	<select id="QnAContentGO" resultType="kr.koreait.vo.QnAVO" parameterType="kr.koreait.vo.QnAVO">
+		select * from QnA where idx = #{idx}	
+	</select>
+	
+	<!-- QnA글 댓글 목록 보여주기 -->
+	<select id="QnAComment" parameterType="kr.koreait.vo.QnAComment" resultType="kr.koreait.vo.QnAComment">
+		select * from QnAComment where main_idx = #{idx} order by idx desc
+	</select>
+	
+	<!-- QnA글 1건 삭제 -->
+	<delete id="QnADelete" parameterType="kr.koreait.vo.QnAVO">
+		delete QnA where idx = #{idx}
+	</delete>
+	
+	<!-- QnA글에 있는 댓글 삭제 -->	
+	<delete id="QnADelete2" parameterType="kr.koreait.vo.QnAComment">
+		delete QnAComment where main_idx = #{idx}
+	</delete>
+	
+	<!-- QnA글 1건 수정 -->
+	<update id="QnAModify" parameterType="kr.koreait.vo.QnAVO" >
+		update QnA set 
+		title = #{title},
+		content = #{content},
+		kind = #{kind}
+		where idx = #{idx}
+	</update>
+	
+	<!-- QnA 댓글 작성 -->
+	<insert id="QnACommentDO" parameterType="kr.koreait.vo.QnAComment">
+		insert into QnACOMMENT (idx, main_idx, content, userid)
+		values(QnAcomment_seq.nextval, #{main_idx}, #{content}, #{userId})
+	</insert>
+
+	<!-- QnA 댓글 개수 증가 -->
+	<update id="QnAcommentIncrease" parameterType="kr.koreait.vo.QnAVO">
+		update QnA set COMMENTNUMBER = COMMENTNUMBER + 1 where idx = #{idx}
+	</update>
+	
+	
+	<!-- QnA 댓글 삭제 -->
+	<delete id="QnACommentDelete" parameterType="kr.koreait.vo.QnAComment">
+		delete QnAComment where idx = #{idx}
+	</delete>
+	
+	<!-- QnA댓글 개수 감소 -->
+	<update id="QnAcommentDecrease" parameterType="kr.koreait.vo.QnAVO">
+		update QnA set COMMENTNUMBER = COMMENTNUMBER - 1 where idx = #{main_idx}
+	</update>
+	
+	<!--검색한 QnA글 몇건있는지 받아오기 -->
+	<select id="QnAselectCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from QnA
+		<if test ='searchType.equals("title")'>
+			where title like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("content")'>
+			where content like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("title_content")'>
+			where title like '%'||#{keyWord}||'%'
+				or content like '%'||#{keyWord}||'%'
+		</if>
+		
+		<if test ='searchType.equals("writer")'>
+			where writer like '%'||#{keyWord}||'%'
+		</if>
+	</select>
+	
+	<!--검색한 QnA글 목록 받아오기 -->
+    <select id="searchQnA" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.QnAVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from QnA where 
+		      ]]>
+		      	<if test ='searchType.equals("title")'>
+		      		title like '%'||#{keyWord}||'%'
+		      	</if>
+				<if test ='searchType.equals("content")'>
+					content like '%'||#{keyWord}||'%'
+				</if>
+				
+				<if test ='searchType.equals("title_content")'>
+					title like '%'||#{keyWord}||'%'
+					or content like '%'||#{keyWord}||'%'
+				</if>
+				
+				<if test ='searchType.equals("writer")'>
+					writer like '%'||#{keyWord}||'%'
+				</if>
+		      <![CDATA[
+			order by idx desc)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+	
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+	<!--내글 몇건있는지 받아오기 -->
+	<select id="MyPageSelectCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from QnA
+			where userId = #{userId}
+	</select>
+	
+	<!--내글 목록 받아오기 -->
+    <select id="searchMyWrite" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.QnAVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from QnA where userId = #{userId}
+			order by idx desc)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+</mapper>
+	
+
+
+
+
+
+
+
+
