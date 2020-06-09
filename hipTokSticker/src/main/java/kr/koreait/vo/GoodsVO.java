@@ -10,7 +10,7 @@ public class GoodsVO {
 	private String gdsDes;
 	private Date register_date;
 	private String goods_value;
-	
+	바꿧다.
 	public int getIdx() {
 		return idx;
 	}
