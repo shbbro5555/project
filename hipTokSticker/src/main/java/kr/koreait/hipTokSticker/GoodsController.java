@@ -31,35 +31,31 @@ public class GoodsController {
 	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
 	
 //	업로드
-	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
-	public void uploadFormGET(Locale locale, Model model) {
-		logger.info("uploadForm GET");
+	@RequestMapping("/uploadFormGO")
+	public String uploadFormGO(HttpServletRequest request, Model model, HttpSession session) {
+		return "/goods/uploadForm";
+	}
+	@RequestMapping("/uploadFormDO")
+	public String uploadFormDO(HttpServletRequest request, Model model, HttpSession session, GoodsVO vo) {
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		System.out.println(vo);
+		mapper.uploadFormDO(vo);
 		
-	}
-	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
-	public String uploadFormPOST(MultipartFile file, Model model, GoodsVO goodsVO) throws Exception {
-		HipTokDAO mapper = sqlSession1.getMapper(HipTokDAO.class);
-		int idx = 1;
-		goodsVO.setIdx(idx);
-		System.out.println(goodsVO.getIdx());
-		String savedFileName = FileUtills.uploadFile(file,uploadPath, idx);
-		goodsVO.setGoods_value(savedFileName);
-		System.out.println(goodsVO);
-		mapper.uploadFile(goodsVO);
-		model.addAttribute("savedFileName", savedFileName);
 		
-		return "home";
+		return "/goods/uploadForm";
 	}
-	@RequestMapping("/PouchGO")
-	public String PouchGO(HttpServletRequest request, Model model, HttpSession session) {
-		return "/goods/Pouch";
+	
+	
+	@RequestMapping("/pouchGO")
+	public String pouchGO(HttpServletRequest request, Model model, HttpSession session) {
+		return "/goods/pouch";
 	}
-	@RequestMapping("/StickerGO")
-	public String StickerGO(HttpServletRequest request, Model model, HttpSession session) {
-		return "/goods/Sticker";
+	@RequestMapping("/stickerGO")
+	public String stickerGO(HttpServletRequest request, Model model, HttpSession session) {
+		return "/goods/sticker";
 	}
-	@RequestMapping("/CaseGO")
-	public String CaseGO(HttpServletRequest request, Model model, HttpSession session) {
-		return "/goods/Case";
+	@RequestMapping("/caseGO")
+	public String caseGO(HttpServletRequest request, Model model, HttpSession session) {
+		return "/goods/case";
 	}
 }

@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="include/Header2.jsp"%>
+	<%@include file="include/Header.jsp"%>
 	<%@include file="./include/footer.jsp"%>
 	<%-- <c:if test="${member != null }">
 			<c:if test="${member.kind =='manager'}">(관리자)</c:if>

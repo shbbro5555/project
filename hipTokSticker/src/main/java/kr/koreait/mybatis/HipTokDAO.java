@@ -139,6 +139,10 @@ public interface HipTokDAO {
 	
 	void uploadFile(GoodsVO goodsVO);
 	
+	
+	//상품 등록
+	void uploadFormDO(GoodsVO vo);
+	
 
 
 

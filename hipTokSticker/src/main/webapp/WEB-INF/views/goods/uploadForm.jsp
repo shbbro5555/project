@@ -42,60 +42,6 @@
     overflow: hidden;
     border-left: 0px solid #eee;
 }
-
-/* 왼쪽 라인 */
-#left {
-    position: fixed;
-    float: left;
-    width: 13.2%;
-    left: 50px;
-    top: 0px;
-    height: 100%;
-    z-index: 999;
-    background: none;
-}
-.logoWidthTop {
-    position: relative;
-    display: block;
-    margin: 70px 0px 50px 0px;
-    border-bottom: 0px #ddd solid;
-    z-index: 999;
-}
-.category {
-    position: relative;
-    display: block;
-    width: 140px;
-    margin: 0px 0 0px;
-    padding: 0px 0 0 50px;
-}
-
-/* 오른쪽 라인 */
-#right {
-    position: fixed;
-    float: right;
-    right: 50px;
-    width: 5%;
-    top: 100px;
-    height: 90%;
-    z-index: 99;
-    background: none;
-}
-.right_menu {
-    margin: 144px 0px 0 0;
-}
-/* 오른쪽 상단 */
-#rightTop {
-	position: fixed;
-    float: right;
-    right: 50px;
-    width: 5%;
-    top: 20px;
-    z-index: 99;
-    background: none;
-    margin: 0px 0px 0px 0px 0 0;
-    font-size: 10px;
-}
-
 /* 가운대 */
 #contents {
     position: relative;
@@ -150,104 +96,11 @@ li{list-style: none; font-family: font-family: 'Noto Sans JP', sans-serif; font-
 a{text-decoration: none}
  
 </style>
-
-<script>
-$(document).ready(function() {
-	  $('#summernote').summernote({
- 	    	placeholder: 'content',
-	        minHeight: 370,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : 'ko-KR'
-	  });
-	});
-</script>
-
-<script>
-function goWrite(frm) {
-	var title = frm.title.value;
-
-	var content = frm.content.value;
-	
-	if (title.trim() == ''){
-		alert("제목을 입력해주세요");
-		return false;
-	}
-	
-	if (content.trim() == ''){
-		alert("내용을 입력해주세요");
-		return false;
-	}
-	frm.submit();
-}
-</script>
-
 </head>
 <body>
+	<%@include file="../include/Header.jsp"%>
 <div id="wrap">
 	<div id="container">
-		<!-- 왼쪽 틀 -->
-		<div id="left">
-			<h1 class="logoWidthTop">
-				<a href="home">
-					<img style="vertical-align: middle; width: 162px; height: 65px;" src="${pageContext.request.contextPath }/resources/images/JDWH_Logo.png">
-				</a>
-			</h1>
-			<div class="category">
-				<ul>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>NEW</h6></a>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
-					</li>
-					<li>
-						<a href="Pouch" style="color:black; letter-spacing: 3px"><h6>Pouch</h6></a>
-					</li>
-					<li>
-						<a href="Sticker" style="color:black; letter-spacing: 3px"><h6>Sticker</h6></a>
-					</li>
-					<li>
-						<a href="Case" style="color:black; letter-spacing: 3px"><h6>Case</h6></a>
-					</li>
-				</ul>
-				<br/>
-				<ul>	
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>REVIEW</h6></a>
-					</li>
-					<li>
-						<a href="list" style="color:black; letter-spacing: 3px"><h6>NOTICE</h6></a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-		<!-- 오른쪽 틀 -->
-		<div id="right">
-			<div id="rightTop">
-				<c:if test="${name == null}">
-					비회원님
-				</c:if>
-				<c:if test="${name != null}">
-					${name}님
-				</c:if>
-			</div>
-			<div id="right_menu">
-				<ul>
-					<c:if test="${name == null}">
-						<li><a href="login" style="color:black"><h6>Login</h6></a></li>
-						<li><a href="join" style="color:black; letter-spacing: 3px"><h6>Join</h6></a></li>
-					</c:if>
-					<c:if test="${name != null}">
-						<li><a href="home" style="color:black"><h6>Logout</h6></a></li>
-					</c:if>
-					<li><a href=""  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
-					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
-				</ul>
-			</div>
-		</div>
-		
 		<!-- 가운대 틀 -->
 		<div id="contents">
 			<div class="sub_contents_inner">
@@ -256,59 +109,69 @@ function goWrite(frm) {
 					<div id="Item">
 					    <h2 class="Title" style="font-family: font-family: 'Noto Sans JP', sans-serif;">상품 등록 </h2>
 					   		<div style="width: 60%; margin: auto;">
-								<form action="uploadForm" id="form1" method="POST" enctype="multipart/form-data" action="requestupload2">
+								<form action="uploadFormDO" id="form1" method="POST" enctype="multipart/form-data" action="requestupload2">
 								 	<table>
 								 		<tr>
 									        <td>상품 이름 :</td> 
-									        <td><input type="text" name="gdsName" /></td>
+									        <td><input type="text" name="name" /></td>
 									    </tr>
 									    <tr>    
 									        <td>가격 :</td> 
-									        <td><input type="text" name="gdsPrice" /></td>
+									        <td><input type="text" name="price" /></td>
 									    </tr>
 									    <tr>
 									        <td>재고량 :</td>
-									        <td><input type="text" name="gdsStock" /></td>
+									        <td><input type="text" name="stock" /></td>
 								       	</tr>
-								       	  <tr>
-									        <td>주문 순서</td>
-									        <td><input type="text" name="gdsDes" /></td>
+								       	<tr>
+								       		<td>
+										        <select name="value1">
+											        	<option>상품분류</option>
+											        	<option value="스티커">스티커</option>
+											        	<option value="케이스">케이스</option>
+											        	<option value="파우치">파우치</option>
+									       		</select>
+								       		</td>
 								       	</tr>
-								       	  <tr>
-									        <td>주문 날짜 :</td>
-									        <td><input type="text" name="register_date" /></td>
+								       	<tr>
+								       		<td>
+										        <select name="value2">
+											        	<option>색깔</option>
+											        	<option value="검정">검정</option>
+											        	<option value="파랑">파랑</option>
+											        	<option value="녹색">녹색</option>
+									       		</select>
+								       		</td>
 								       	</tr>
-								       	  <tr>
+								       	<tr>
 									        <td>상품설명 :</td>
-									        <td><input type="text" name="goods_value" /></td>
+									        <td><textarea rows="10" cols="100"name="content"></textarea></td>
 								       	</tr>
 									    <tr>    
 									        <td>
 								        </tr>
-								        <tr>
-								        	<td>카테고리 :</td>
-								        	<td> 
-								        		<select name="category">
-										        	<option>선택해 주세요.</option>
-										        	<option value="Sticker">스티커</option>
-										        	<option value="Case">케이스</option>
-										        	<option value="Pouch">파우치</option>
-								       			</select>
-								        	</td>
-								        </tr>
-								        
-								        <tr>
-									        <td>
-										        <!-- <input type="file" name="file" />
-										        <input type="submit"/> -->
-										        <input type="file" name="file" />
-								     			   <input type="submit" value="전송" />
-									        </td>
-								     	</tr>
-								       <!--  <input type="hidden" value="${ savedFileName }" name="name"> -->
 									</table>
+<div class="inputArea">
+ <label for="img">이미지</label>
+ <input type="file" id="img" name="img" />
+ <div class="select_img"><img src="" /></div>
+ 
+ <script>
+  $("#img").change(function(){
+   if(this.files && this.files[0]) {
+    var reader = new FileReader;
+    reader.onload = function(data) {
+     $(".select_img img").attr("src", data.target.result).width(500);        
+    }
+    reader.readAsDataURL(this.files[0]);
+   }
+  });
+ </script>
+  <%=request.getRealPath("/") %>
+</div>
+
+  <input type="submit" value="등록" />
 							    </form>
-							 	  	<h6>저장된 상품이름 : ${ savedFileName }</h6>
 						</div>
 					</div>					
 				</div>

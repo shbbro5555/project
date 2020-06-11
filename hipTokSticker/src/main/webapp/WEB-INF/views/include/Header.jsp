@@ -25,7 +25,7 @@ ul li {display: inline-block;}
 ul li:hover {background: white;}
 ul li:hover ul {display: block; margin-left: 300px;}
 ul li ul {
-  position: absolute;
+  position: relative;
   width: 200px;
   display: none;
 }
@@ -65,18 +65,19 @@ ul li ul li:hover {background: gray;}
 <div class="menu filed">
   <ul>
     <li>
-      <a href="#" style="margin-left: 300px;">Category</a>
+      <a href="#" >Category</a>
       <ul>
-        <li><a href="#">Pouch</a></li>
-        <li><a href="#">Case</a></li>
-        <li><a href="#">Sticker</a></li>
+        <li><a href="pouchGO">Pouch</a></li>
+        <li><a href="caseGO">Case</a></li>
+        <li><a href="stickerGO">Sticker</a></li>
+       	<li><a href="uploadFormGO">상품등록</a></li>
       </ul>
     </li>
   </ul>
   
  <ul>
     <li>
-      <a href="introductionGO" style="margin-left: 300px;">About</a>
+      <a href="introductionGO" >About</a>
       <ul>
       </ul>
     </li>
@@ -84,7 +85,7 @@ ul li ul li:hover {background: gray;}
  
  <ul>
     <li>
-      <a href="#" style="margin-left: 300px;">Board</a>
+      <a href="#" >Board</a>
       <ul>
         <li><a href="noticeGO">Notice</a></li>
         <li><a href="QnAGO">QnA</a></li>
