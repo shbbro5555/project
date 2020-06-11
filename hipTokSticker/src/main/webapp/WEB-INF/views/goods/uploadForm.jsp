@@ -152,12 +152,12 @@ a{text-decoration: none}
 								        </tr>
 									</table>
 <div class="inputArea">
- <label for="img">이미지</label>
- <input type="file" id="img" name="img" />
+ <label for="file">이미지</label>
+ <input type="file" id="file" name="file" />
  <div class="select_img"><img src="" /></div>
  
  <script>
-  $("#img").change(function(){
+  $("#file").change(function(){
    if(this.files && this.files[0]) {
     var reader = new FileReader;
     reader.onload = function(data) {

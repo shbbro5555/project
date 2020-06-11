@@ -315,8 +315,8 @@
 <!-- ****************************************************************************************************** -->
 	<!-- 상품 등록 -->
 	<insert id="uploadFormDO" parameterType="kr.koreait.vo.GoodsVO">
-		insert into QnA (idx, name, price, stock, value1, value2, content)
-		values(goods_seq.nextval, #{name}, #{price}, #{stock}, #{value1}, #{value2}, #{content})
+		insert into goods (idx, name, price, stock, value1, value2, content, fileName)
+		values(goods_seq.nextval, #{name}, #{price}, #{stock}, #{value1}, #{value2}, #{content}, #{fileName})
 	</insert>
 </mapper>
 	

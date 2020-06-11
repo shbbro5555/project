@@ -33,7 +33,7 @@ public class FileUtills {
 	
 	public static String uploadFile(MultipartFile file,String uploadPath, int idx) throws IOException {
 		String media = file.getOriginalFilename();
-	//상품 등록 중복 방지	
+	//상품 등록 중복 방지	0  +
 		String filename = System.currentTimeMillis()+media.substring(media.lastIndexOf("."));
 		//파일업로드
 		File target = new File(uploadPath, filename);

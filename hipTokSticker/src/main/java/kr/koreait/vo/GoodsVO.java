@@ -12,9 +12,7 @@ public class GoodsVO {
 	private String value1;
 	private String value2;
 	private String content;
-	private String img;
-	private String tumbimg;
-	
+	private String fileName;
 	
 	public int getIdx() {
 		return idx;
@@ -64,24 +62,19 @@ public class GoodsVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getImg() {
-		return img;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-	public String getTumbimg() {
-		return tumbimg;
-	}
-	public void setTumbimg(String tumbimg) {
-		this.tumbimg = tumbimg;
-	}
-	
 	@Override
 	public String toString() {
 		return "GoodsVO [idx=" + idx + ", name=" + name + ", price=" + price + ", stock=" + stock + ", regidate="
-				+ regidate + ", value1=" + value1 + ", value2=" + value2 + ", content=" + content + ", img=" + img
-				+ ", tumbimg=" + tumbimg + "]";
+				+ regidate + ", value1=" + value1 + ", value2=" + value2 + ", content=" + content + ", fileName="
+				+ fileName + "]";
 	}
+
+	
 
 }
