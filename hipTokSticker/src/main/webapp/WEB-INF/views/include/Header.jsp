@@ -22,19 +22,19 @@ ul {
   padding: 0;
 }
 ul li {display: inline-block;}
-ul li:hover {background: white;}
-ul li:hover ul {display: block; margin-left: 300px;}
+ul li:hover {background: yellow;}
+ul li:hover ul {display: block;}
 ul li ul {
-  position: relative;
-  width: 200px;
-  display: none;
+	  position: absolute;
+	  width: 200px;
+	  display: none;
 }
 ul li ul li { 
-  background: white; 
+  background: #2474FF; 
   display: block; 
 }
-ul li ul li a {display:white !important;} 
-ul li ul li:hover {background: gray;}
+ul li ul li a {display:block !important;} 
+ul li ul li:hover {background: #f9f7;}
 
 </style>
 </head> 
@@ -64,7 +64,7 @@ ul li ul li:hover {background: gray;}
 	</c:if>
 <div class="menu filed">
   <ul>
-    <li>
+    <li style="position: relative; left: 10%;">
       <a href="#" >Category</a>
       <ul>
         <li><a href="pouchGO">Pouch</a></li>
@@ -77,15 +77,20 @@ ul li ul li:hover {background: gray;}
   </ul>
   
  <ul>
-    <li>
+    <li style="position: relative; left: 35%;">
       <a href="introductionGO" >About</a>
       <ul>
+       <li><a href="#">이더블유케이</a></li>
+        <li><a href="#">떡상</a></li>
+        <li><a href="#">대한제강</a></li>
+       	<li><a href="#">상한가</a></li>
+       	<li><a href="#">가즈아~</a></li>
       </ul>
     </li>
  </ul>
  
  <ul>
-    <li>
+    <li style="position: relative; left: 65%;">
       <a href="#" >Board</a>
       <ul>
         <li><a href="noticeGO">Notice</a></li>

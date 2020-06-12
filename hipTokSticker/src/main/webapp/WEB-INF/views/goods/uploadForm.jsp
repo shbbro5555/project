@@ -167,7 +167,6 @@ a{text-decoration: none}
    }
   });
  </script>
-  <%=request.getRealPath("/") %>
 </div>
 
   <input type="submit" value="등록" />

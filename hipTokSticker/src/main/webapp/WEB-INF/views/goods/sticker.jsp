@@ -27,60 +27,6 @@
     overflow: hidden;
     border-left: 0px solid #eee;
 }
-
-/* 왼쪽 라인 */
-#left {
-    position: fixed;
-    float: left;
-    width: 13.2%;
-    left: 50px;
-    top: 0px;
-    height: 100%;
-    z-index: 999;
-    background: none;
-}
-.logoWidthTop {
-    position: relative;
-    display: block;
-    margin: 70px 0px 50px 0px;
-    border-bottom: 0px #ddd solid;
-    z-index: 999;
-}
-.category {
-    position: relative;
-    display: block;
-    width: 140px;
-    margin: 0px 0 0px;
-    padding: 0px 0 0 50px;
-}
-
-/* 오른쪽 라인 */
-#right {
-    position: fixed;
-    float: right;
-    right: 50px;
-    width: 5%;
-    top: 100px;
-    height: 90%;
-    z-index: 99;
-    background: none;
-}
-.right_menu {
-    margin: 144px 0px 0 0;
-}
-/* 오른쪽 상단 */
-#rightTop {
-	position: fixed;
-    float: right;
-    right: 50px;
-    width: 5%;
-    top: 20px;
-    z-index: 99;
-    background: none;
-    margin: 0px 0px 0px 0px 0 0;
-    font-size: 10px;
-}
-
 /* 가운대 */
 #contents {
     position: relative;
@@ -194,53 +140,6 @@ a{text-decoration: none}
 <body>
 <div id="wrap">
 	<div id="container">
-		<!-- 왼쪽 틀 -->
-		<div id="left">
-			<h1 class="logoWidthTop">
-				<a href="home">
-					<img style="vertical-align: middle; width: 162px; height: 65px;" src="${pageContext.request.contextPath }/resources/images/logo.jpg">
-				</a>
-			</h1>
-			<div class="category">
-				<ul>
-					<li>
-						<a href=homeGO style="color:black; letter-spacing: 3px"><h6>Main</h6></a>
-					</li>
-					<li>
-						<a href="CaseGO" style="color:black; letter-spacing: 3px"><h6>Case</h6></a>
-					</li>
-					<li>
-						<a href="PouchGO" style="color:black; letter-spacing: 3px"><h6>Pouch</h6></a>
-					</li>
-					<li>
-						<a href="StickerGO" style="color:black; letter-spacing: 3px"><h6>Sticker</h6></a>
-					</li>
-				</ul>
-				<br/>
-				<ul>	
-				</ul>
-			</div>
-		</div>
-		
-		<!-- 오른쪽 틀 -->
-		<div id="right">
-			<div id="rightTop">
-			</div>
-			<div id="right_menu">
-				<ul>
-					<c:if test="${name == null}">
-						<li><a href="login" style="color:black"><h6>Login</h6></a></li>
-					</c:if>
-					<c:if test="${name != null}">
-						<%session.invalidate();%>
-						<li><a href="home" style="color:black"><h6>Logout</h6></a></li>
-					</c:if>
-					<li><a href=""  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
-				
-				</ul>
-			</div>
-		</div>
-		
 		<!-- 가운대 틀 -->
 		<div id="contents">
 			<div class="sub_contents_inner">
@@ -295,17 +194,9 @@ a{text-decoration: none}
 					         </p>
 					         <p class="newIcon">NEW</p>
 					      </li>
-					
-					     
-					
-					    
 					   </ul>
 					</div>					
-						
-						
-								
 				</div>
-				
 			</div>
 		</div>
 	</div>

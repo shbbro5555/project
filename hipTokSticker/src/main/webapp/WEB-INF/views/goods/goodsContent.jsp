@@ -53,6 +53,42 @@ ${item.value2}
 			<input type="button" value="구매하기"> <input type="button" value="장바구니"> <input type="button" value="♥"> 
 </div>
 
+<div>
+	<table>
+		<tr>
+			<td><h3><label for="contentField">상품 정보</label></h3></td>
+			<td><h3><label for="reviewField">리뷰</label></h3></td>
+			<td><h3><label for="QnAField">QnA</label></h3></td>
+		</tr>
+	</table>
+</div>
+<div id="contentField">
+===============================================================================<h2>상품 정보</h2><br>
+	${item.content }<br>
+===============================================================================<br>
+</div>
+<div id="reviewField">
+	<h2>리뷰</h2><input type="button" value = "상품 리뷰 작성하기">
+	<table border="1">
+		<tr>
+			<td>제목</td><td>평점</td><td>작성자</td><td>등록일</td>
+		</tr>
+		<tr>
+			<td>review.title</td><td>review.star</td><td>review.userId</td><td>review.regidate</td>
+		</tr>
+	</table>
+</div> <br>
+================================================================================<br>
+<div id="QnAField">
+	<h2>QnA</h2><input type="button" value = "상품 문의">
+	<table border="1">
+		<tr>
+			<td>제목</td><td>작성자</td><td>등록일</td>
+		</tr>
+		<tr>
+			<td>QnA.title</td><td>QnA.userId</td><td>QnA.regidate</td>
+		</tr>
+	</table>
+</div>
 
 </body>
-</html>

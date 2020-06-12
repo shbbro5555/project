@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@include file="include/Header.jsp"%>
-	<%@include file="./include/footer.jsp"%>
+	<%@include file="include/footer.jsp"%>
 	<img src="${pageContext.request.contextPath }/resources/images/${file.fileName}">
 	
 	
