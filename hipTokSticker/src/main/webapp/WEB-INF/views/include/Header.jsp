@@ -80,7 +80,7 @@ ul li ul li:hover {background: #f9f7;}
     <li style="position: relative; left: 35%;">
       <a href="introductionGO" >About</a>
       <ul>
-       <li><a href="#">이더블유케이</a></li>
+       <li><a href="#">이더블유케이 d</a></li>
         <li><a href="#">떡상</a></li>
         <li><a href="#">대한제강</a></li>
        	<li><a href="#">상한가</a></li>
