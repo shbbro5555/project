@@ -22,7 +22,7 @@ ul {
   padding: 0;
 }
 ul li {display: inline-block;}
-ul li:hover {background: white;}
+ul li:hover {background: yellow;}
 ul li:hover ul {display: block; margin-left: 300px;}
 ul li ul {
   position: absolute;
