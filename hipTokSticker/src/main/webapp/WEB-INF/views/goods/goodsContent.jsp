@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +10,16 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
+var count = 0;
 	$(document).on('click', '#decreaseBtn', function(){
-		
-	}
+		count = count--;
+		return count;
+	});
+	$(document).on('click', '#increaseBtn', function(){
+		count = count++;
+		alert("증가");
+		return count;
+	});
 
 </script>
 <body>
@@ -37,7 +47,8 @@ ${item.value2}
 		<tr>
 		</tr>
 	</table>
-			<input type="button" value="-" id="decreaseBtn"> 수량: x <input type="button" value="+" id="increaseBtn"> y원
+			<input type="button" value="-" id="decreaseBtn"> 수량: ${count}
+			<input type="button" value="+" id="increaseBtn"> y원
 			<br>
 			<input type="button" value="구매하기"> <input type="button" value="장바구니"> <input type="button" value="♥"> 
 </div>
