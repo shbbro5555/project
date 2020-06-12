@@ -318,6 +318,26 @@
 		insert into goods (idx, name, price, stock, value1, value2, content, fileName)
 		values(goods_seq.nextval, #{name}, #{price}, #{stock}, #{value1}, #{value2}, #{content}, #{fileName})
 	</insert>
+	
+	<!-- 상품 갯수  -->
+	<select id="itemCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from goods
+	</select>
+	
+	<select id="itemList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goods order by idx desc) AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+	
+	<!-- 상품1개 보여주기 -->
+	<select id="goodsContentGO" parameterType="int" resultType="kr.koreait.vo.GoodsVO">
+		select * from goods where idx = #{idx}
+	
+	</select>
 </mapper>
 	
 

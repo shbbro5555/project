@@ -71,6 +71,7 @@ ul li ul li:hover {background: gray;}
         <li><a href="caseGO">Case</a></li>
         <li><a href="stickerGO">Sticker</a></li>
        	<li><a href="uploadFormGO">상품등록</a></li>
+       	<li><a href="itemGO">아이템</a></li>
       </ul>
     </li>
   </ul>

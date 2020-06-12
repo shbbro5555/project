@@ -18,6 +18,10 @@ import kr.koreait.vo.QnAVO;
  */
 public interface HipTokDAO {
 
+
+
+
+
 /**
  * 
  * @param joinDO(MemberVO vo)		회원가입
@@ -143,6 +147,16 @@ public interface HipTokDAO {
 	//상품 등록
 	void uploadFormDO(GoodsVO vo);
 	
+	
+//	상품 보여주기
+	int itemCount(BoardList boardList);
+	
+	ArrayList<GoodsVO> itemList(BoardList boardList);
+	
+
+//	상품 내용창으로
+
+	GoodsVO goodsContentGO(int idx);
 
 
 

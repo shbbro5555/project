@@ -193,56 +193,9 @@ a{text-decoration: none}
 
 </head>
 <body>
+<%@include file="../include/Header.jsp"%>
 <div id="wrap">
 	<div id="container">
-		<!-- 왼쪽 틀 -->
-		<div id="left">
-			<h1 class="logoWidthTop">
-				<a href="home">
-					<img style="vertical-align: middle; width: 162px; height: 65px;" src="${pageContext.request.contextPath }/resources/images/logo.jpg">
-				</a>
-			</h1>
-			<div class="category">
-				<ul>
-					<li>
-						<a href="homeGO" style="color:black; letter-spacing: 3px"><h6>Main</h6></a>
-					</li>
-					<li>
-						<a href="CaseGO" style="color:black; letter-spacing: 3px"><h6>Case</h6></a>
-					</li>
-					<li>
-						<a href="PouchGO" style="color:black; letter-spacing: 3px"><h6>Pouch</h6></a>
-					</li>
-					<li>
-						<a href="StickerGO" style="color:black; letter-spacing: 3px"><h6>Sticker</h6></a>
-					</li>
-				</ul>
-				<br/>
-				<ul>	
-				</ul>
-			</div>
-		</div>
-		
-		<!-- 오른쪽 틀 -->
-		<div id="right">
-			<div id="rightTop">
-			
-			</div>
-			<div id="right_menu">
-				<ul>
-					<c:if test="${name == null}">
-						<li><a href="login" style="color:black"><h6>Login</h6></a></li>
-					</c:if>
-					<c:if test="${name != null}">
-						<%session.invalidate();%>
-						<li><a href="home" style="color:black"><h6>Logout</h6></a></li>
-					</c:if>
-					<li><a href=""  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
-					
-				</ul>
-			</div>
-		</div>
-		
 		<!-- 가운대 틀 -->
 		<div id="contents">
 			<div class="sub_contents_inner">
@@ -254,7 +207,7 @@ a{text-decoration: none}
 					      <li style="font-size: 17px;">
 					         <a href="#">
 					            <!--   img태그에 넣고싶은 사진 넣기   -->
-					            <img src="${pageContext.request.contextPath }/resources/images/airpotcase.PNG" alt="Hoodie01">
+					            <img src="${pageContext.request.contextPath }/resources/upload${df}" alt="Hoodie01">
 					            <!--   신상옷의 각각의 제목 적는 곳  -->
 					            <span class="itemName">에어팟 케이스</span>
 					         </a>
@@ -264,40 +217,6 @@ a{text-decoration: none}
 					         </p>
 					      </li>
 					
-					       <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/PhoneCase.PNG" alt="Sweatshirt02">
-					            <span class="itemName">시스루 몽글 폰케이스</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">18,000won</span>
-					            <span>15,000won</span>
-					         </p>
-					      </li>
-					
-					     
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/wellsiPhoneCase.PNG" alt="bag01">
-					            <span class="itemName">웰시코기 폰케이스</span>
-					         </a>
-					         <p class="price">
-					             <span style="text-decoration: line-through; margin-right: 10px; ">18,000won</span>
-					            <span>11,000won</span>
-					         </p>
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/Phonetok.PNG" alt="bag01">
-					            <span class="itemName">베어톡 </span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">4,500won</span>
-					            <span>3,000won</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
 					
 					     
 					
