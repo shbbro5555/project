@@ -46,7 +46,7 @@ public class BoardController {
  */
 	@RequestMapping("/noticeGO")
 	public String noticeGO(HttpServletRequest request, Model model, NoticeVO vo, HttpSession session) {
-		System.out.println("noticeGO(공지글) 페이지로, 메서드 실행");
+		System.out.println("noticeGO(공지글) 페이지로, 메서드1 실행");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
 		int pageSize = 10;
 		int currentPage = 1;
