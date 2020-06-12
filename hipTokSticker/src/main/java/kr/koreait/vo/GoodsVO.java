@@ -1,8 +1,9 @@
 package kr.koreait.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class GoodsVO {
+	
 	private int idx;
 	private String gdsName;
 	private String gdsPrice;
@@ -10,66 +11,76 @@ public class GoodsVO {
 	private String gdsDes;
 	private Date register_date;
 	private String goods_value;
+	private String name;
+	private int price;
+	private int stock;
+	private Date regidate;
+	private String value1;
+	private String value2;
+	private String content;
+	private String fileName;
+	
 	public int getIdx() {
 		return idx;
 	}
-
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-
-	public String getGdsName() {
-		return gdsName;
+	public String getName() {
+		return name;
 	}
-
-	public void setGdsName(String gdsName) {
-		this.gdsName = gdsName;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getGdsPrice() {
-		return gdsPrice;
+	public int getPrice() {
+		return price;
 	}
-
-	public void setGdsPrice(String gdsPrice) {
-		this.gdsPrice = gdsPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-
-	public String getGdsStock() {
-		return gdsStock;
+	public int getStock() {
+		return stock;
 	}
-
-	public void setGdsStock(String gdsStock) {
-		this.gdsStock = gdsStock;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
-
-	public String getGdsDes() {
-		return gdsDes;
+	public Date getRegidate() {
+		return regidate;
 	}
-
-	public void setGdsDes(String gdsDes) {
-		this.gdsDes = gdsDes;
+	public void setRegidate(Date regidate) {
+		this.regidate = regidate;
 	}
-
-	public Date getRegister_date() {
-		return register_date;
+	public String getValue1() {
+		return value1;
 	}
-
-	public void setRegister_date(Date register_date) {
-		this.register_date = register_date;
+	public void setValue1(String value1) {
+		this.value1 = value1;
 	}
-
-	public String getGoods_value() {
-		return goods_value;
+	public String getValue2() {
+		return value2;
 	}
-
-	public void setGoods_value(String goods_value) {
-		this.goods_value = goods_value;
+	public void setValue2(String value2) {
+		this.value2 = value2;
 	}
-
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	@Override
 	public String toString() {
-		return "GoodsVO [idx=" + idx + ", gdsName=" + gdsName + ", gdsPrice=" + gdsPrice + ", gdsStock=" + gdsStock
-				+ ", gdsDes=" + gdsDes + ", goods_value=" + goods_value + "]";
+		return "GoodsVO [idx=" + idx + ", name=" + name + ", price=" + price + ", stock=" + stock + ", regidate="
+				+ regidate + ", value1=" + value1 + ", value2=" + value2 + ", content=" + content + ", fileName="
+				+ fileName + "]";
 	}
+
+	
 
 }

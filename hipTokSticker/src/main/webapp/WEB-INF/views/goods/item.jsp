@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-	<link rel="stylesheet"  href="https://han3283.cafe24.com/js/lightslider/css/lightslider.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"> <!-- Noto Sans JP -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
 <style type="text/css">
+
 #wrap {
     position: relative;
     width: 100%;
@@ -122,13 +116,45 @@ ul, ol, li{
 }
 
 /*   신상품 제목부분 */
-.Title{
+.NewTitle{
    text-align: center;
    font-weight: normal;
    letter-spacing: 10px;
    margin-bottom: 40px;
 }
 .ItemUL{}
+.ItemUL li{
+   float: left;
+   margin-right: 2%;
+   width: 32%;
+   padding: 5px;
+   box-sizing: border-box;
+}
+.ItemUL li:nth-child(3n){
+   margin-right: 0;
+}
+.ItemUL a{
+   width: 100%;
+   color: inherit;
+   text-decoration: none;
+}
+.ItemUL a img{
+   width: inherit;
+   height: 350px;
+}
+.ItemUL a .itemName{
+   display: block;
+   margin: 10px 0;
+}
+
+.ItemUL .color span{
+   display: inline-block;
+   font-size: 0;
+   line-height: 0;
+   width: 12px;
+   height: 12px;
+}
+
 
 /*   new아이콘 부분 사이즈 조절은 알아서 바꿔도 됨   */
 .ItemUL .newIcon{
@@ -139,112 +165,107 @@ ul, ol, li{
 }
 
 li{list-style: none; font-family: font-family: 'Noto Sans JP', sans-serif; font-size: 30px;}
+a{text-decoration: none}
 
-.category li ul{
-background: white;
-display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
-height:auto;
-padding:0px;
-margin:0px;
-border:0px;
-position:absolute;
-width:400px;
-z-index:200;
-/*top:1em;
-/*left:0;*/
-}
 
-.category li:hover ul{
-display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+.product_listmain {
+    margin: 0px 0 37px;
+    border-bottom: 0px solid #eee;
 }
+.product_listmain ul.prdList {
+    display: table;
+    width: 140%;
+    margin: 0 auto;
+    margin-left: 0px;
+    font-size: 0;
+    line-height: 0;
+    text-align: left;
+}
+.product_listmain ul.column3 li.item {
+    width: 33.3%;
+}
+.product_listmain ul.column3 li.item .box {
+    width: 90%;
+}
+ 
 
-.category li a:hover, .category ul li:hover a{
-background: white;
-color:balck;
-text-decoration:none;
-font-size: 12px;
-}
-
-.category li:hover li a{
-background:none;
-}
 </style>
+
 </head>
 <body>
+<%@include file="../include/Header.jsp"%>
 <div id="wrap">
 	<div id="container">
-		<!-- 왼쪽 틀 -->
-		<div id="left">
-			<h1 class="logoWidthTop">
-				<a href="home">
-					<img style="vertical-align: middle; width: 162px; height: 65px;" src="${pageContext.request.contextPath }/resources/images/JDWH_Logo.png">
-				</a>
-			</h1>
-			<div class="category">
-				<ul>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>NEW</h6></a>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>Pouch</h6></a>
-						<ul>
-							 <li><a href="#">맨투맨&후드티</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>Sticker</h6></a>
-						 <ul>
-					 		<li><a href="#">슬랙스</a></li>
-					 	</ul>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>Case</h6></a>
-						<ul>
-							<li><a href="#">모자</a></li>
-					 	</ul>
-					</li>
-				</ul>
-				<br/>
-				<ul>	
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>REVIEW</h6></a>
-					</li>
-					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>NOTICE</h6></a>
-					</li>
-				</ul>
+		<!-- 가운대 틀 -->
+		<div id="contents">
+			<div class="sub_contents_inner">
+				<div class="contents_inner">
+					<!-- Pouch -->
+					<div id="Item">
+					   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">Case</h2>
+						<c:forEach var="item" items="${itemList.itemList}">
+						   <ul class="ItemUL">
+						      <li style="font-size: 17px;">
+						         <a href="goodsContentGO?idx=${item.idx}">
+						            <!--   img태그에 넣고싶은 사진 넣기   -->
+						            <img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}">
+						            <!--   신상옷의 각각의 제목 적는 곳  -->
+					    	        <span class="itemName">${item.name}</span>
+					        	 </a>
+					         	<p class="price">
+					            	<span>${item.price}원</span>
+					         	</p>
+						      </li>
+					    
+					   </ul>
+					</c:forEach>
+					</div>					
+						
+						
+								
+				</div>
+				
 			</div>
 		</div>
+<!-- 처음으로, 10페이지 앞으로 -->
+		<c:if test="${itemList.startPage > 1}">
+			<input type="button" value="＜＜" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
+			<input type="button" value="＜" 
+					onclick="location.href='?currentPage=${itemList.startPage - 1}'" 
+					title="이전 10 페이지로 이동합니다."/>
+		</c:if>
 		
-		<!-- 오른쪽 틀 -->
-		<div id="right">
-			<div id="rightTop">
-				<c:if test="${name == null}">
-					비회원님
-				</c:if>
-				<c:if test="${name != null}">
-					${name}님
-				</c:if>
-			</div>
-			<div id="right_menu">
-				<ul>
-					<c:if test="${name == null}">
-						<li><a href="login" style="color:black"><h6>Login</h6></a></li>
-						<li><a href="join" style="color:black; letter-spacing: 3px"><h6>Join</h6></a></li>
-					</c:if>
-					<c:if test="${name != null}">
-						<%-- <%session.invalidate();%> --%>
-						<li><a href="home" style="color:black"><h6>Logout</h6></a></li>
-					</c:if>
-					<li><a href=""  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
-					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
-				</ul>
-			</div>
-		</div>
+		<c:if test="${itemList.startPage <= 1}">
+			<input type="button" value="＜＜" disabled="disabled" title="이미 첫 페이지 입니다."/>
+			<input type="button" value="＜" disabled="disabled" title="이전 10 페이지가 없습니다."/>
+		</c:if>
 	</div>
 </div>
+	<!-- 페이지 이동 -->
+    <c:forEach var="i" begin="${itemList.startPage}" end="${itemList.endPage}" step="1">
+    
+       <c:if test="${i == itemList.currentPage}">
+          <input type="button" value="${i}" disabled="disabled"/>
+       </c:if>
+       
+       <c:if test="${i != itemList.currentPage}">
+          <input type="button" value="${i}" onclick="location.href='?currentPage=${i}'"  style="border: none; color: white; background-color: green;"
+             title="${i}페이지로 이동합니다."/>
+       </c:if>
+    </c:forEach>
+    <!-- 마지막으로, 10페이지 뒤로 -->
+		<c:if test="${itemList.endPage < itemList.totalPage}">
+			<input type="button" value="＞"  
+					onclick="location.href='?currentPage=${itemList.endPage + 1}'" title="다음 10 페이지로 이동합니다."/>
+			<input type="button" value="＞＞" 
+					onclick="location.href='?currentPage=${itemList.totalPage}'" title="마지막 페이지로 이동합니다."/>
+		</c:if>
+
+		<c:if test="${itemList.endPage >= itemList.totalPage}">
+				<input type="button" value="＞" disabled="disabled" title="다음 10 페이지가 없습니다."/>
+			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
+		</c:if>
+
+
 </body>
 </html>

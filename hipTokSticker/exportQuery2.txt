@@ -1,0 +1,34 @@
+commit;  
+insert into notice (idx, title, content, writer, userid)
+		values(notice_seq.nextval, '테스트 제목1', 'test 내용1', '이민형', 'alsgud519');
+insert into notice (idx, title, content, writer, userid)
+		values(notice_seq.nextval, '테스트 제목2', 'test 내용2', '이주희', '2jjo');    
+insert into notice (idx, title, content, writer, userid)
+		values(notice_seq.nextval, '테스트 제목3', 'test 내용3', '심운보', 'pencel');    
+
+insert into qna (idx, title, content, writer, userid, kind)
+    values(qna_seq.nextval, 'qna테스트 제목1', '큐앤에이test 내용1', '이민형', 'alsgud519', '배송');    
+insert into qna (idx, title, content, writer, userid, kind)
+    values(qna_seq.nextval, 'qna테스트 제목2', '큐앤에이test 내용2', '이주희', '2jjo', '상품문의');
+insert into qna (idx, title, content, writer, userid, kind)
+    values(qna_seq.nextval, 'qna테스트 제목3', '큐앤에이test 내용3', '심운보', 'pencel', '교환,반품');
+
+select * from notice order by idx desc;
+select * from noticecomment order by idx desc;
+select * from qna order by idx desc;
+select * from qnacomment order by idx desc;
+
+delete qna;
+delete qnacomment;
+delete notice;
+delete noticecomment;
+
+drop sequence qna_sequence;
+create sequence qna_sequence;
+drop sequence qnacomment_sequence;
+create sequence qnacomment_sequence;
+
+drop sequence notice_sequence;
+create sequence notice_sequence;
+drop sequence noticecomment_sequence;
+create sequence noticecomment_sequence;
