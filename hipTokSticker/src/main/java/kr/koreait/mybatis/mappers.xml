@@ -323,7 +323,7 @@
 	<select id="itemCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
 		select count(*) from goods
 	</select>
-	
+	<!-- 상품 페이징처리 -->
 	<select id="itemList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[
 		select * from (
@@ -336,8 +336,28 @@
 	<!-- 상품1개 보여주기 -->
 	<select id="goodsContentGO" parameterType="int" resultType="kr.koreait.vo.GoodsVO">
 		select * from goods where idx = #{idx}
-	
 	</select>
+	
+	<!-- 상품리뷰등록 -->
+	<insert id="goodsReviewDO" parameterType="kr.koreait.vo.GoodsReviewVO">
+		insert into GoodsReview(idx, main_idx, title, content, rating, filename, userId) 
+		values(goodsreview_seq.nextval, #{main_idx}, #{title}, #{content}, #{rating}, #{filename}, #{userId})
+	</insert>
+	
+	<!-- 상품 리뷰갯수  -->
+	<select id="reviewCount" parameterType="int" resultType="int">
+		select count(*) from goodsreview where main_idx = #{idx}
+	</select>
+	<!-- 상품 리뷰 페이징처리 -->
+	<select id="reviewList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsReviewVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goodsreview order by idx desc) AA where rownum <= #{endNo} and main_idx = #{idx}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+	
 </mapper>
 	
 

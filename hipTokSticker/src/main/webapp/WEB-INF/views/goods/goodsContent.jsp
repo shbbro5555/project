@@ -9,20 +9,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-var count = 0;
-	$(document).on('click', '#decreaseBtn', function(){
-		count = count--;
-		return count;
-	});
-	$(document).on('click', '#increaseBtn', function(){
-		count = count++;
-		alert("증가");
-		return count;
-	});
 
+	$(document).on('click', '#reviewBtn', function(){
+		if('${member}'==""){
+			alert("로그인해주세요");
+		}
+		if('${member}'!=""){
+			goodsReviewGOForm.submit();
+		}
+	});
+	
+	
 </script>
 <body>
+<%@include file="../include/Header.jsp"%>
 상품설명
 
 ${item.name}
@@ -68,16 +70,61 @@ ${item.value2}
 ===============================================================================<br>
 </div>
 <div id="reviewField">
-	<h2>리뷰</h2><input type="button" value = "상품 리뷰 작성하기">
+	<h2>리뷰</h2>
+		<form action="goodsReviewGO" method="get" id="goodsReviewGOForm">
+			<input type="hidden" value="${item.idx}" name="idx">
+			<input type="button" value="상품 리뷰 작성하기" id="reviewBtn">
+		</form>
+		
 	<table border="1">
-		<tr>
-			<td>제목</td><td>평점</td><td>작성자</td><td>등록일</td>
-		</tr>
-		<tr>
-			<td>review.title</td><td>review.star</td><td>review.userId</td><td>review.regidate</td>
-		</tr>
+			<tr>
+				<td>제목</td><td>평점</td><td>작성자</td><td>등록일</td>
+			</tr>
+		<c:forEach var="review" items="${reviewList.reviewList}">
+			<tr>
+				<td>${review.title}</td><td>${review.rating}</td><td>${review.userId}</td><td>${review.regidate}</td>
+			</tr>
+		</c:forEach>
+		
 	</table>
-</div> <br>
+	<!-- 처음으로, 10페이지 앞으로 -->
+		<c:if test="${reviewList.startPage > 1}">
+			<input type="button" value="＜＜" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
+			<input type="button" value="＜" 
+					onclick="location.href='?currentPage=${reviewList.startPage - 1}'" 
+					title="이전 10 페이지로 이동합니다."/>
+		</c:if>
+		
+		<c:if test="${reviewList.startPage <= 1}">
+			<input type="button" value="＜＜" disabled="disabled" title="이미 첫 페이지 입니다."/>
+			<input type="button" value="＜" disabled="disabled" title="이전 10 페이지가 없습니다."/>
+		</c:if>
+	<!-- 페이지 이동 -->
+    <c:forEach var="i" begin="${reviewList.startPage}" end="${reviewList.endPage}" step="1">
+    
+       <c:if test="${i == reviewList.currentPage}">
+          <input type="button" value="${i}" disabled="disabled"/>
+       </c:if>
+       
+       <c:if test="${i != reviewList.currentPage}">
+          <input type="button" value="${i}" onclick="location.href='?currentPage=${i}'"  style="border: none; color: white; background-color: green;"
+             title="${i}페이지로 이동합니다."/>
+       </c:if>
+    </c:forEach>
+    <!-- 마지막으로, 10페이지 뒤로 -->
+		<c:if test="${reviewList.endPage < reviewList.totalPage}">
+			<input type="button" value="＞"  
+					onclick="location.href='?currentPage=${reviewList.endPage + 1}'" title="다음 10 페이지로 이동합니다."/>
+			<input type="button" value="＞＞" 
+					onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
+		</c:if>
+
+		<c:if test="${reviewList.endPage >= reviewList.totalPage}">
+				<input type="button" value="＞" disabled="disabled" title="다음 10 페이지가 없습니다."/>
+			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
+		</c:if>
+	</div>
+<br>
 ================================================================================<br>
 <div id="QnAField">
 	<h2>QnA</h2><input type="button" value = "상품 문의">

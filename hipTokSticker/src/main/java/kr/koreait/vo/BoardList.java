@@ -7,6 +7,10 @@ public class BoardList {
    private ArrayList<NoticeVO> noticeList = new ArrayList<NoticeVO>();
    private ArrayList<QnAVO> qnaList = new ArrayList<QnAVO>();
    private ArrayList<GoodsVO> itemList = new ArrayList<GoodsVO>();
+   private ArrayList<GoodsReviewVO> reviewList = new ArrayList<GoodsReviewVO>();
+   
+   private int idx;
+   
    private int pageSize = 0;
    private int totalCount = 0;
    private int totalPage = 0;
@@ -46,7 +50,15 @@ public BoardList() {}
    }
 	   
 	
-   public String getUserId() {
+   public int getIdx() {
+	return idx;
+}
+
+public void setIdx(int idx) {
+	this.idx = idx;
+}
+
+public String getUserId() {
 	   return userId;
    }
    
@@ -77,6 +89,14 @@ public ArrayList<GoodsVO> getItemList() {
 
 	public void setItemList(ArrayList<GoodsVO> itemList) {
 		this.itemList = itemList;
+	}
+	
+public ArrayList<GoodsReviewVO> getReviewList() {
+		return reviewList;
+	}
+
+	public void setReviewList(ArrayList<GoodsReviewVO> reviewList) {
+		this.reviewList = reviewList;
 	}
 
 public String getSearchType() {
@@ -169,10 +189,11 @@ public String getSearchType() {
 
 	@Override
 	public String toString() {
-		return "BoardList [noticeList=" + noticeList + ", qnaList=" + qnaList + ", itemList=" + itemList + ", pageSize="
-				+ pageSize + ", totalCount=" + totalCount + ", totalPage=" + totalPage + ", currentPage=" + currentPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", userId=" + userId + ", searchType=" + searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
+		return "BoardList [noticeList=" + noticeList + ", qnaList=" + qnaList + ", itemList=" + itemList
+				+ ", reviewList=" + reviewList + ", pageSize=" + pageSize + ", totalCount=" + totalCount
+				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNo=" + startNo + ", endNo="
+				+ endNo + ", startPage=" + startPage + ", endPage=" + endPage + ", userId=" + userId + ", searchType="
+				+ searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
 	}
 
 	
