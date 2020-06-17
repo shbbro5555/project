@@ -358,6 +358,11 @@
 			]]>   
 	</select>
 	
+	<!-- 상품 리뷰창 보여주기 -->
+	<select id="selectReview" parameterType="int" resultType="kr.koreait.vo.GoodsReviewVO">
+		select * from goodsReview where idx = #{idx}		
+	</select>
+	
 </mapper>
 	
 

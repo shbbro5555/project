@@ -20,8 +20,6 @@
 			goodsReviewGOForm.submit();
 		}
 	});
-	
-	
 </script>
 <body>
 <%@include file="../include/Header.jsp"%>
@@ -78,11 +76,21 @@ ${item.value2}
 		
 	<table border="1">
 			<tr>
-				<td>제목</td><td>평점</td><td>작성자</td><td>등록일</td>
+				<td>등록일</td>
+				<td>평점</td>
+				<td>제목</td>
+				<td>작성자</td>
 			</tr>
 		<c:forEach var="review" items="${reviewList.reviewList}">
 			<tr>
-				<td>${review.title}</td><td>${review.rating}</td><td>${review.userId}</td><td>${review.regidate}</td>
+				<td><fmt:formatDate value="${review.regidate}" pattern="yyyy.MM.dd(E) HH:MM"></fmt:formatDate></td>
+				<td>${review.rating}</td>
+				<td>
+					<a href="#" onclick="window.open('reviewContentGO?idx=${review.idx}','window팝업',
+					'width=800, height=700, menubar=no, status=no, toolbar=no, left=500, top=100');">${review.title}</a>
+				</td>
+				<td>${review.userId}</td>
+				
 			</tr>
 		</c:forEach>
 		

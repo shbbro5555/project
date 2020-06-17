@@ -110,9 +110,21 @@ public class GoodsController {
 	public String goodsReviewGO(HttpServletRequest request, Model model, HttpSession session, GoodsVO vo) {
 		System.out.println("goodsReviewGO 리뷰등록창으로");
 		int idx = Integer.parseInt(request.getParameter("idx"));
-		model.addAttribute("idx",idx);
+		model.addAttribute("idx", idx);
 		return "/goods/goodsReview";
 	}
+	
+	@RequestMapping("/reviewContentGO")
+	public String reviewContentGO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo) {
+		System.out.println("reviewContentGO 상품리뷰 내용창으로");
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		vo = mapper.selectReview(idx);
+		model.addAttribute("review", vo);
+		System.out.println(vo);
+		return "/goods/reviewContent";
+	}
+	
 	
 	@RequestMapping("/goodsReviewDO")
 	public String goodsReviewDO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo, MultipartFile file) {

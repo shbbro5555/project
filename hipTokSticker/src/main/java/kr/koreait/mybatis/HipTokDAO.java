@@ -160,6 +160,9 @@ public interface HipTokDAO {
 	int reviewCount(BoardList boardList);
 //	상품 리뷰 목록
 	ArrayList<GoodsReviewVO> reviewList(BoardList boardList);
+	
+//	상품 리뷰 창 보여주기
+	GoodsReviewVO selectReview(int idx);
 
 
 
