@@ -162,13 +162,58 @@ ${item.value2}
 		<input type="button" value="상품 문의하러 가기" id="QnABtn">
 	</form>
 	<table border="1">
-		<tr>
-			<td>제목</td><td>작성자</td><td>등록일</td>
-		</tr>
-		<tr>
-			<td>QnA.title</td><td>QnA.userId</td><td>QnA.regidate</td>
-		</tr>
+			<tr>
+				<td>등록일</td>
+				<td>제목</td>
+				<td>작성자</td>
+			</tr>
+		<c:forEach var="QnA" items="${QnAList.goodsQnAList}">
+			<tr>
+				<td><fmt:formatDate value="${QnA.regidate}" pattern="yyyy.MM.dd(E) HH:MM"></fmt:formatDate></td>
+				<td>
+					<a onclick="window.open('goodsReviewContentGO?idx=${QnA.idx}','window팝업',
+					'width=800, height=700, menubar=no, status=no, toolbar=no, left=500, top=100');">${QnA.title}</a>
+				</td>
+				<td>${QnA.userId}</td>
+			</tr>
+		</c:forEach>
 	</table>
+	<!-- 처음으로, 10페이지 앞으로 -->
+		<c:if test="${QnAList.startPage > 1}">
+			<input type="button" value="＜＜" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
+			<input type="button" value="＜" 
+					onclick="location.href='?currentPage=${QnAList.startPage - 1}'" 
+					title="이전 10 페이지로 이동합니다."/>
+		</c:if>
+		
+		<c:if test="${QnAList.startPage <= 1}">
+			<input type="button" value="＜＜" disabled="disabled" title="이미 첫 페이지 입니다."/>
+			<input type="button" value="＜" disabled="disabled" title="이전 10 페이지가 없습니다."/>
+		</c:if>
+	<!-- 페이지 이동 -->
+    <c:forEach var="i" begin="${QnAList.startPage}" end="${QnAList.endPage}" step="1">
+    
+       <c:if test="${i == QnAList.currentPage}">
+          <input type="button" value="${i}" disabled="disabled"/>
+       </c:if>
+       
+       <c:if test="${i != QnAList.currentPage}">
+          <input type="button" value="${i}" onclick="location.href='?currentPage=${i}'"  style="border: none; color: white; background-color: green;"
+             title="${i}페이지로 이동합니다."/>
+       </c:if>
+    </c:forEach>
+    <!-- 마지막으로, 10페이지 뒤로 -->
+		<c:if test="${QnAList.endPage < QnAList.totalPage}">
+			<input type="button" value="＞"  
+					onclick="location.href='?currentPage=${QnAList.endPage + 1}'" title="다음 10 페이지로 이동합니다."/>
+			<input type="button" value="＞＞" 
+					onclick="location.href='?currentPage=${QnAList.totalPage}'" title="마지막 페이지로 이동합니다."/>
+		</c:if>
+
+		<c:if test="${QnAList.endPage >= QnAList.totalPage}">
+				<input type="button" value="＞" disabled="disabled" title="다음 10 페이지가 없습니다."/>
+			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
+		</c:if>
 </div>
 
 </body>

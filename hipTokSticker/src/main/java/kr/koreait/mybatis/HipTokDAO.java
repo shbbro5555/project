@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.koreait.vo.BoardList;
+import kr.koreait.vo.GoodsQnAVO;
 import kr.koreait.vo.GoodsReviewVO;
 import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.MemberVO;
@@ -153,16 +154,28 @@ public interface HipTokDAO {
 //	상품 내용창으로
 	GoodsVO goodsContentGO(int idx);
 	
+	
 //	상품 리뷰등록
 	void goodsReviewWriteDO(GoodsReviewVO vo);
+
 	
 //	상품 리뷰 개수
 	int goodsReviewCount(BoardList boardList);
 //	상품 리뷰 목록
 	ArrayList<GoodsReviewVO> goodsReviewList(BoardList boardList);
-	
 //	상품 리뷰 창 보여주기
 	GoodsReviewVO selectGoodsReview(int idx);
+	
+	
+	
+//	상품 QnA등록
+	void goodsQnAWriteDO(GoodsQnAVO vo);
+	
+
+//	상품 QnA 개수
+	int goodsQnACount(BoardList boardList);
+//	상품  QnA 목록
+	ArrayList<GoodsQnAVO> goodsQnAList(BoardList boardList);
 
 
 

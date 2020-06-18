@@ -363,6 +363,29 @@
 		select * from goodsReview where idx = #{idx}		
 	</select>
 	
+	
+	
+	
+	<!-- 상등 QnA 등록 -->
+	<insert id="goodsQnAWriteDO" parameterType="kr.koreait.vo.GoodsQnAVO">
+		insert into GoodsQnA(idx, main_idx, title, content, userId) 
+		values(goodsQna_seq.nextval, #{main_idx}, #{title}, #{content}, #{userId})
+	</insert>
+	
+	<!-- 상품 QnA갯수  -->
+	<select id="goodsQnACount" parameterType="int" resultType="int">
+		select count(*) from goodsQnA where main_idx = #{idx}
+	</select>
+	<!-- 상품 QnA 페이징처리 -->
+	<select id="goodsQnAList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsQnAVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goodsQnA order by idx desc) AA where rownum <= #{endNo} and main_idx = #{idx}
+			) where rnum >= #{startNo}
+			]]>   
+	</select>
+	
 </mapper>
 	
 

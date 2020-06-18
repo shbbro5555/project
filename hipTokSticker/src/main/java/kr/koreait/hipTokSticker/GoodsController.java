@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.koreait.Utill.UploadFileUtils;
 import kr.koreait.mybatis.HipTokDAO;
 import kr.koreait.vo.BoardList;
+import kr.koreait.vo.GoodsQnAVO;
 import kr.koreait.vo.GoodsReviewVO;
 import kr.koreait.vo.GoodsVO;
 @Controller
@@ -85,11 +86,13 @@ public class GoodsController {
 		GoodsVO result = mapper.goodsContentGO(idx);
 		model.addAttribute("item", result);
 		
+//	페이징처리 시작
 		int pageSize = 5;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		} catch(NumberFormatException e) { }
+//	리뷰 페이징
 		int totalCount = mapper.goodsReviewCount(boardList);
 		boardList.setIdx(idx);
 		//BoardList boardList = ctx.getBean("boardList", BoardList.class);
@@ -103,13 +106,27 @@ public class GoodsController {
 		boardList.setReviewList(mapper.goodsReviewList(boardList));
 		System.out.println(boardList);
 		model.addAttribute("reviewList", boardList);
+//	QnA 페이징
+		totalCount = mapper.goodsQnACount(boardList);
+		boardList.setIdx(idx);
+		//BoardList boardList = ctx.getBean("boardList", BoardList.class);
+		boardList.initBoardList(pageSize, totalCount, currentPage);
+		
+		hmap = new HashMap<String, Integer>();
+		hmap.put("startNo", boardList.getStartNo());
+		hmap.put("endNo", boardList.getEndNo());
+		boardList.setHmap(hmap);
+		System.out.println("개수: " + totalCount + " boardList :" + boardList);
+		boardList.setGoodsQnAList(mapper.goodsQnAList(boardList));
+		System.out.println(boardList);
+		model.addAttribute("QnAList", boardList);
 		
 		return "/goods/goodsContent";
 	}
 	
 	
 	@RequestMapping("/goodsReviewWriteGO")
-	public String goodsReviewWriteGO(HttpServletRequest request, Model model, HttpSession session, GoodsVO vo) {
+	public String goodsReviewWriteGO(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("goodsReviewGO 리뷰등록창으로");
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		model.addAttribute("idx", idx);
@@ -146,6 +163,23 @@ public class GoodsController {
 	
 
 	
+	@RequestMapping("/goodsQnAWriteGO")
+	public String goodsQnAWriteGO(HttpServletRequest request, Model model, HttpSession session) {
+		System.out.println("goodsQnAWriteGO QnA등록창으로");
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		model.addAttribute("idx", idx);
+		return "/goods/goodsQnAWrite";
+	}
+	
+	@RequestMapping("/goodsQnAWriteDO")
+	public String goodsQnAWriteDO(HttpServletRequest request, Model model, HttpSession session, GoodsQnAVO vo) {
+		System.out.println("goodsQnAWriteDO QnA등록하기");
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		
+		System.out.println(vo);
+		mapper.goodsQnAWriteDO(vo);
+		return "redirect:goodsContentGO?idx="+request.getParameter("main_idx");
+	}
 	
 	
 	

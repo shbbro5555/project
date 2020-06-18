@@ -8,6 +8,7 @@ public class BoardList {
    private ArrayList<QnAVO> qnaList = new ArrayList<QnAVO>();
    private ArrayList<GoodsVO> itemList = new ArrayList<GoodsVO>();
    private ArrayList<GoodsReviewVO> reviewList = new ArrayList<GoodsReviewVO>();
+   private ArrayList<GoodsQnAVO> goodsQnAList = new ArrayList<GoodsQnAVO>();
    
    private int idx;
    
@@ -81,26 +82,32 @@ public String getUserId() {
 		this.qnaList = qnaList;
 	}
 	
-	
-
-public ArrayList<GoodsVO> getItemList() {
-		return itemList;
+	public ArrayList<GoodsVO> getItemList() {
+			return itemList;
 	}
 
 	public void setItemList(ArrayList<GoodsVO> itemList) {
 		this.itemList = itemList;
 	}
-	
-public ArrayList<GoodsReviewVO> getReviewList() {
-		return reviewList;
+		
+	public ArrayList<GoodsReviewVO> getReviewList() {
+			return reviewList;
 	}
 
 	public void setReviewList(ArrayList<GoodsReviewVO> reviewList) {
 		this.reviewList = reviewList;
 	}
+	
+	public ArrayList<GoodsQnAVO> getGoodsQnAList() {
+			return goodsQnAList;
+	}
 
-public String getSearchType() {
-		return searchType;
+	public void setGoodsQnAList(ArrayList<GoodsQnAVO> goodsQnAList) {
+		this.goodsQnAList = goodsQnAList;
+	}
+	
+	public String getSearchType() {
+			return searchType;
 	}
 
 	public void setSearchType(String searchType) {
@@ -190,11 +197,13 @@ public String getSearchType() {
 	@Override
 	public String toString() {
 		return "BoardList [noticeList=" + noticeList + ", qnaList=" + qnaList + ", itemList=" + itemList
-				+ ", reviewList=" + reviewList + ", pageSize=" + pageSize + ", totalCount=" + totalCount
-				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNo=" + startNo + ", endNo="
-				+ endNo + ", startPage=" + startPage + ", endPage=" + endPage + ", userId=" + userId + ", searchType="
-				+ searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
+				+ ", reviewList=" + reviewList + ", goodsQnAList=" + goodsQnAList + ", idx=" + idx + ", pageSize="
+				+ pageSize + ", totalCount=" + totalCount + ", totalPage=" + totalPage + ", currentPage=" + currentPage
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", userId=" + userId + ", searchType=" + searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
 	}
+
+	
 
 	
 
