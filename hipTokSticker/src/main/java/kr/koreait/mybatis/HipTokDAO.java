@@ -154,15 +154,15 @@ public interface HipTokDAO {
 	GoodsVO goodsContentGO(int idx);
 	
 //	상품 리뷰등록
-	void goodsReviewDO(GoodsReviewVO vo);
+	void goodsReviewWriteDO(GoodsReviewVO vo);
 	
 //	상품 리뷰 개수
-	int reviewCount(BoardList boardList);
+	int goodsReviewCount(BoardList boardList);
 //	상품 리뷰 목록
-	ArrayList<GoodsReviewVO> reviewList(BoardList boardList);
+	ArrayList<GoodsReviewVO> goodsReviewList(BoardList boardList);
 	
 //	상품 리뷰 창 보여주기
-	GoodsReviewVO selectReview(int idx);
+	GoodsReviewVO selectGoodsReview(int idx);
 
 
 

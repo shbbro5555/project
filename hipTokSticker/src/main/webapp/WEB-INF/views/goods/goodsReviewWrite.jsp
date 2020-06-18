@@ -9,7 +9,7 @@
 <body>
 <%@include file="../include/Header.jsp"%>
 <div>
-	<form action="goodsReviewDO" method="post" enctype="multipart/form-data">
+	<form action="goodsReviewWriteDO" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${member.userId}" name="userId">
 			<input type="hidden" value="${idx}" name="main_idx">
 		<table>

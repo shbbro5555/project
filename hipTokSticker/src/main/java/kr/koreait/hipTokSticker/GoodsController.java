@@ -90,7 +90,7 @@ public class GoodsController {
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		} catch(NumberFormatException e) { }
-		int totalCount = mapper.reviewCount(boardList);
+		int totalCount = mapper.goodsReviewCount(boardList);
 		boardList.setIdx(idx);
 		//BoardList boardList = ctx.getBean("boardList", BoardList.class);
 		boardList.initBoardList(pageSize, totalCount, currentPage);
@@ -100,35 +100,24 @@ public class GoodsController {
 		hmap.put("endNo", boardList.getEndNo());
 		boardList.setHmap(hmap);
 		System.out.println("개수: " + totalCount + " boardList :" + boardList);
-		boardList.setReviewList(mapper.reviewList(boardList));
+		boardList.setReviewList(mapper.goodsReviewList(boardList));
 		System.out.println(boardList);
 		model.addAttribute("reviewList", boardList);
 		
 		return "/goods/goodsContent";
 	}
-	@RequestMapping("/goodsReviewGO")
-	public String goodsReviewGO(HttpServletRequest request, Model model, HttpSession session, GoodsVO vo) {
+	
+	
+	@RequestMapping("/goodsReviewWriteGO")
+	public String goodsReviewWriteGO(HttpServletRequest request, Model model, HttpSession session, GoodsVO vo) {
 		System.out.println("goodsReviewGO 리뷰등록창으로");
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		model.addAttribute("idx", idx);
-		return "/goods/goodsReview";
+		return "/goods/goodsReviewWrite";
 	}
-	
-	@RequestMapping("/reviewContentGO")
-	public String reviewContentGO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo) {
-		System.out.println("reviewContentGO 상품리뷰 내용창으로");
-		int idx = Integer.parseInt(request.getParameter("idx"));
-		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		vo = mapper.selectReview(idx);
-		model.addAttribute("review", vo);
-		System.out.println(vo);
-		return "/goods/reviewContent";
-	}
-	
-	
-	@RequestMapping("/goodsReviewDO")
-	public String goodsReviewDO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo, MultipartFile file) {
-		System.out.println("goodsReviewDO 리뷰등록하기");
+	@RequestMapping("/goodsReviewWriteDO")
+	public String goodsReviewWriteDO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo, MultipartFile file) {
+		System.out.println("goodsReviewWriteDO 리뷰등록하기");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
 		try {
 			String fileName = UploadFileUtils.fileUpload(uploadPath, file);
@@ -139,9 +128,27 @@ public class GoodsController {
 		}
 		System.out.println(vo);
 		model.addAttribute("file", file);
-		mapper.goodsReviewDO(vo);
+		mapper.goodsReviewWriteDO(vo);
 		return "redirect:goodsContentGO?idx="+request.getParameter("main_idx");
 	}
+	@RequestMapping("/goodsReviewContentGO")
+	public String goodsReviewContentGO(HttpServletRequest request, Model model, HttpSession session, GoodsReviewVO vo) {
+		System.out.println("reviewContentGO 상품리뷰 내용창으로");
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		vo = mapper.selectGoodsReview(idx);
+		model.addAttribute("review", vo);
+		System.out.println(vo);
+		return "/goods/goodsReviewContent";
+	}
+	
+	
+	
+
+	
+	
+	
+	
 	
 	@RequestMapping("/pouchGO")
 	public String pouchGO(HttpServletRequest request, Model model, HttpSession session) {
@@ -155,4 +162,6 @@ public class GoodsController {
 	public String caseGO(HttpServletRequest request, Model model, HttpSession session) {
 		return "/goods/case";
 	}
+	
+	
 }

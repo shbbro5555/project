@@ -40,6 +40,7 @@ h1{text-align: center}
 	<h1>로그인</h1>
 	<form action="loginDO" method="post">
 		<p>
+			<input type="hidden" name="prevPage" value="${prevPage}">
 			<label for="userId">아이디</label>
 			<input type="text" id="userId" name="userId"  maxlength="45" >
 		</p>

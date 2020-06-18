@@ -14,10 +14,24 @@
 
 	$(document).on('click', '#reviewBtn', function(){
 		if('${member}'==""){
-			alert("로그인해주세요");
+			var result=confirm("로그인창으로 가시겠습니까?");
+		}
+		if (result) {
+			location.href="loginGO";
 		}
 		if('${member}'!=""){
 			goodsReviewGOForm.submit();
+		}
+	});
+	$(document).on('click', '#QnABtn', function(){
+		if('${member}'==""){
+			var result=confirm("로그인창으로 가시겠습니까?");
+		}
+		if (result) {
+			location.href="loginGO";
+		}
+		if('${member}'!=""){
+			goodsQnAGOForm.submit();
 		}
 	});
 </script>
@@ -50,26 +64,33 @@ ${item.value2}
 			<input type="button" value="-" id="decreaseBtn"> 수량: ${count}
 			<input type="button" value="+" id="increaseBtn"> y원
 			<br>
-			<input type="button" value="구매하기"> <input type="button" value="장바구니"> <input type="button" value="♥"> 
+			<input type="button" value="구매하기"> <input type="button" value="장바구니 담기"> <input type="button" value="♥"> 
 </div>
+
+
 
 <div>
 	<table>
 		<tr>
-			<td><h3><label for="contentField">상품 정보</label></h3></td>
-			<td><h3><label for="reviewField">리뷰</label></h3></td>
-			<td><h3><label for="QnAField">QnA</label></h3></td>
+			<td><h3><a href="#contentField">상품 정보</a></h3></td>
+			<td><h3><a href="#reviewField">리뷰</a></h3></td>
+			<td><h3><a href="#QnAField">QnA</a></h3></td>
 		</tr>
 	</table>
 </div>
 <div id="contentField">
 ===============================================================================<h2>상품 정보</h2><br>
 	${item.content }<br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	123123123213
+	12312312
+	<br>
 ===============================================================================<br>
 </div>
 <div id="reviewField">
 	<h2>리뷰</h2>
-		<form action="goodsReviewGO" method="get" id="goodsReviewGOForm">
+		<form action="goodsReviewWriteGO" method="get" id="goodsReviewGOForm">
 			<input type="hidden" value="${item.idx}" name="idx">
 			<input type="button" value="상품 리뷰 작성하기" id="reviewBtn">
 		</form>
@@ -86,7 +107,7 @@ ${item.value2}
 				<td><fmt:formatDate value="${review.regidate}" pattern="yyyy.MM.dd(E) HH:MM"></fmt:formatDate></td>
 				<td>${review.rating}</td>
 				<td>
-					<a href="#" onclick="window.open('reviewContentGO?idx=${review.idx}','window팝업',
+					<a onclick="window.open('goodsReviewContentGO?idx=${review.idx}','window팝업',
 					'width=800, height=700, menubar=no, status=no, toolbar=no, left=500, top=100');">${review.title}</a>
 				</td>
 				<td>${review.userId}</td>
@@ -135,7 +156,11 @@ ${item.value2}
 <br>
 ================================================================================<br>
 <div id="QnAField">
-	<h2>QnA</h2><input type="button" value = "상품 문의">
+	<h2>QnA</h2>
+	<form action="goodsQnAWriteGO" method="get" id="goodsQnAGOForm">
+		<input type="hidden" value="${item.idx}" name="idx">
+		<input type="button" value="상품 문의하러 가기" id="QnABtn">
+	</form>
 	<table border="1">
 		<tr>
 			<td>제목</td><td>작성자</td><td>등록일</td>

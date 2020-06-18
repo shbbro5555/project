@@ -55,8 +55,34 @@ public class MemberController {
 	@RequestMapping("/loginGO")			
 	public String loginGO(HttpServletRequest request, Model model) {
 		System.out.println("loginGO(로그인) 페이지로");
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
 		return "member/login";
 	}
+	/**
+	 * @param loginDO(vo)		vo형식으로 데이터베이스의 아이디 비밀번호를 비교해서 존재하면 로그인을 하고, 존재하지 않으면 로그인이 되지 않도록 합니다.<br>
+	 * @param sf				"yyyy년 MM월 dd일"서식으로 가입일을 설정해서 보내줍니다.<br>
+	 * @return					로그인 후 성공하면 홈페이지로 이동하고, 실패하면 로그인창에 머뭅니다.
+	 */
+		@RequestMapping("/loginDO")
+		public String loginDO(HttpServletRequest request, Model model, MemberVO vo)  {
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");			//	날짜 서식 변환
+			HttpSession session = request.getSession();
+			HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+			MemberVO result = mapper.loginDO(vo);
+			System.out.println("loginDO 로그인 메서드 실행");
+			String prevPage = request.getParameter("prevPage").substring(36);
+			if(result == null) {
+				//로그인 실패			
+				model.addAttribute("check",true);
+				return "/member/login";
+			}else {
+				//로그인 성공
+				session.setAttribute("member", result);
+				session.setAttribute("userRegidate", sf.format(result.getRegiDate()));		// 날짜 서식변환 적용
+				return "redirect:"+ prevPage;
+			}
+		}
 /**
  * @param session.invalidate() 	현재 로그인 되어있는 아이디정보의 세션을 지워줍니다.(로그아웃)<br>
  * @return 						로그아웃 후에 홈페이지로 이동합니다.
@@ -65,7 +91,14 @@ public class MemberController {
 	public String logoutDO(HttpServletRequest request, Model model, MemberVO vo, HttpSession session) {
 		System.out.println("logutDO 로그아웃 메서드 실행");
 		session.invalidate();
-		return "home";
+		String referrer = request.getHeader("Referer").substring(36);
+		if(referrer.contains("myPageGO") || referrer.contains("shoppingCartGO") || referrer.contains("memberOutGO") ||
+				referrer.contains("Modify") || referrer.contains("Write")) {
+			return "home";
+		}
+		else {
+			return "redirect:" + referrer;
+		}
 	}
 /**
  * 
@@ -74,9 +107,6 @@ public class MemberController {
 	@RequestMapping(value="/myPageGO", method = RequestMethod.GET)
 	public String myPageGO(HttpServletRequest request, Model model, MemberVO vo, HttpSession session, BoardList boardList) {
 		System.out.println("myPageGO(마이페이지) 페이지로");
-		
-		
-		
 		
 		// 내가쓴 글을 받아온다.
 		System.out.println("QnASearch QnA글 검색 메서드 실행");
@@ -112,29 +142,7 @@ public class MemberController {
 		System.out.println("joinDO 회원가입 메서드 실행");
 		return "home";
 	}
-/**
- * @param loginDO(vo)		vo형식으로 데이터베이스의 아이디 비밀번호를 비교해서 존재하면 로그인을 하고, 존재하지 않으면 로그인이 되지 않도록 합니다.<br>
- * @param sf				"yyyy년 MM월 dd일"서식으로 가입일을 설정해서 보내줍니다.<br>
- * @return					로그인 후 성공하면 홈페이지로 이동하고, 실패하면 로그인창에 머뭅니다.
- */
-	@RequestMapping("/loginDO")
-	public String loginDO(HttpServletRequest request, Model model, MemberVO vo)  {
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");			//	날짜 서식 변환
-		HttpSession session = request.getSession();
-		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		MemberVO result = mapper.loginDO(vo);
-		System.out.println("loginDO 로그인 메서드 실행");
-		if(result == null) {
-			//로그인 실패			
-			model.addAttribute("check",true);
-			return "/member/login";
-		}else {
-			//로그인 성공
-			session.setAttribute("member", result);
-			session.setAttribute("userRegidate", sf.format(result.getRegiDate()));		// 날짜 서식변환 적용
-			return "home";
-		}
-	}
+
 /**
  * 
  * @return	회원정보 수정 페이지로 이동합니다.
