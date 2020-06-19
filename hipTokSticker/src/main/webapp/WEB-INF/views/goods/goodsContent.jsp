@@ -34,7 +34,61 @@
 			goodsQnAGOForm.submit();
 		}
 	});
+//	메뉴 상단고정
+	$(document).ready(function(){
+        var jbOffset = $('.menuField').offset();
+        $(window).scroll(function() {
+          if ($(document).scrollTop() > jbOffset.top) {
+            $('.menuField').addClass('fixed');
+          }
+          else {
+            $('.menuField').removeClass('fixed');
+          }
+        });
+      });
+      
+     $(document).ready(function(){
+    	var count = 1;
+    	var price =  '${item.price}';
+    	
+    	if($(document).on('click', '#decreaseBtn', function(){
+    		if(count < 1){
+    			alert("수량은 0개이하로 설정할 수 없습니다.");
+    		}
+    		else{
+    			count = count - 1;
+    			price = price - price;	
+        		alert(count);	
+        		alert(price);	
+    		}
+    		
+    	}));
+    	if($(document).on('click', '#increaseBtn', function(){
+    		count = count + 1;
+    		price = price + price;
+    		alert(count);
+        	alert(price);	
+	   	}));
+    	 
+    	 
+     });
+      
+      
 </script>
+<style>
+.menuField{
+	text-align: center;
+    background-color: yellow;
+    padding: 10px 0px;
+    width: 100%;
+    
+}
+.fixed{
+	position: fixed;
+	top: 0px;
+}
+
+</style>
 <body>
 <%@include file="../include/Header.jsp"%>
 상품설명
@@ -44,32 +98,36 @@ ${item.price}
 ${item.value1}
 ${item.value2}
 <div>
-	<img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}">
-	<table style="position: relative; left 60%;">
-		<tr>
-			<td>상품명 :${item.name}</td>
-		</tr> 
-		<tr>
-			<td>가격 :${item.price}</td>
-		</tr> 
-		<tr>
-			<td>배송방법 : 택배</td>
-		</tr>
-		<tr>
-			<td>배송비: 3000원</td>
-		</tr>
-		<tr>
-		</tr>
-	</table>
-			<input type="button" value="-" id="decreaseBtn"> 수량: ${count}
-			<input type="button" value="+" id="increaseBtn"> y원
-			<br>
-			<input type="button" value="구매하기"> <input type="button" value="장바구니 담기"> <input type="button" value="♥"> 
+	<div class=imgField style="position: relative; left: 10%; width: 300px;">
+		<img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}">
+	</div>
+	<div class=field2 style="position: relative; left: 40%; margin-bottom: 60px">
+		<table style="position: relative; left 60%; top: 10%;">
+			<tr>
+				<td>상품명 :${item.name}</td>
+			</tr> 
+			<tr>
+				<td>가격 :${item.price}</td>
+			</tr> 
+			<tr>
+				<td>배송방법 : 택배</td>
+			</tr>
+			<tr>
+				<td>배송비: 3000원</td>
+			</tr>
+			<tr>
+			</tr>
+		</table>
+				<input type="button" value="-" id="decreaseBtn"> 수량: 
+				<input type="button" value="+" id="increaseBtn"> y원
+				<br>
+				<input type="button" value="구매하기"> <input type="button" value="장바구니 담기"> <input type="button" value="♥">
+	</div>		
 </div>
 
 
 
-<div>
+<div class="menuField">
 	<table>
 		<tr>
 			<td><h3><a href="#contentField">상품 정보</a></h3></td>
