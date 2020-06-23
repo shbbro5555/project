@@ -182,6 +182,21 @@ public class GoodsController {
 	}
 	
 	
+	@RequestMapping("/orderFormGO")
+	public String orderFormGO(HttpServletRequest request, Model model, HttpSession session, GoodsQnAVO vo) {
+		
+		
+		String item_name = request.getParameter("item_name");
+		int count = Integer.parseInt(request.getParameter("count"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		System.out.println(item_name + count + price);
+		
+		model.addAttribute("item_name", item_name);
+		model.addAttribute("count", count);
+		model.addAttribute("price", price);
+		
+		return "/goods/order";
+	}
 	
 	
 	@RequestMapping("/pouchGO")

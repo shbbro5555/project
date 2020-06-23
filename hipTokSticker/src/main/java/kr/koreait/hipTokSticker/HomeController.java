@@ -1,6 +1,6 @@
 package kr.koreait.hipTokSticker;
 
-import java.util.Locale;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.koreait.mybatis.HipTokDAO;
+import kr.koreait.vo.BoardList;
+import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.MemberVO;
 
 
@@ -37,18 +40,29 @@ public class HomeController {
  * @return	홈페이지에서 시작합니다.
  */
 	@RequestMapping(value = "/", method = RequestMethod.GET)	
-	public String home(Locale locale, Model model) {
-		System.out.println("홈페이지 시이~작");
-		return "home";
-	}
-/**
- * 
- * @return	홈페이지로 이동합니다.
- */
-	@RequestMapping("/homeGO")			
-	public String home(HttpServletRequest request, Model model) {
-		System.out.println("homeGO (홈페이지)로 이동");
-		return "home";
+	public String itemGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
+		System.out.println("itemGO 상품창으로");
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		int pageSize = 9;
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch(NumberFormatException e) { }
+		int totalCount = mapper.itemCount(boardList);
+		
+		//BoardList boardList = ctx.getBean("boardList", BoardList.class);
+		boardList.initBoardList(pageSize, totalCount, currentPage);
+		
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("startNo", boardList.getStartNo());
+		hmap.put("endNo", boardList.getEndNo());
+		boardList.setHmap(hmap);
+		System.out.println("개수: " + totalCount + " boardList :" + boardList);
+		boardList.setItemList(mapper.itemList(boardList));
+		System.out.println(boardList);
+		model.addAttribute("itemList", boardList);
+		
+		return "/goods/item";
 	}
 /**
  * 

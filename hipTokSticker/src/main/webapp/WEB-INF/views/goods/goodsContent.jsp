@@ -47,33 +47,33 @@
         });
       });
       
+//	상품 개수조절
      $(document).ready(function(){
-    	var count = 1;
-    	var price =  '${item.price}';
-    	
+    	var count = 0;
+    	var price = 0;
+    	document.order_form.count.value=count;
+    	document.order_form.price.value=price;
     	if($(document).on('click', '#decreaseBtn', function(){
     		if(count < 1){
     			alert("수량은 0개이하로 설정할 수 없습니다.");
     		}
     		else{
     			count = count - 1;
-    			price = price - price;	
-        		alert(count);	
-        		alert(price);	
+    			price = price - parseInt('${item.price}');
+    			document.order_form.count.value=count;
+    			document.order_form.price.value=price;
     		}
-    		
     	}));
+    	
     	if($(document).on('click', '#increaseBtn', function(){
     		count = count + 1;
-    		price = price + price;
-    		alert(count);
-        	alert(price);	
+    		price = price + parseInt('${item.price}');
+    		document.order_form.count.value=count;
+    		document.order_form.price.value=price;
 	   	}));
-    	 
-    	 
+    	
+    	
      });
-      
-      
 </script>
 <style>
 .menuField{
@@ -118,10 +118,17 @@ ${item.value2}
 			<tr>
 			</tr>
 		</table>
-				<input type="button" value="-" id="decreaseBtn"> 수량: 
-				<input type="button" value="+" id="increaseBtn"> y원
+			<form action="orderFormGO" name="order_form">
+				<input type="button" value="-" id="decreaseBtn"> 
+				수량 : <input type="text" name="count" style="width: 25px; text-align:center;" readonly="readonly" value="">
+				<input type="button" value="+" id="increaseBtn">
+				금액 : <input type="text" name="price" style="width: 200px; text-align:left; border: 0; " readonly="readonly" value="">
+				<input type="hidden" name="item_name" value="${item.name}">
+				<input type="hidden" name="idx" value="${item.idx}">
 				<br>
-				<input type="button" value="구매하기"> <input type="button" value="장바구니 담기"> <input type="button" value="♥">
+				<input type="submit" value="구매하기"> 
+			</form>	
+				<input type="button" value="장바구니 담기"> <input type="button" value="♥">
 	</div>		
 </div>
 

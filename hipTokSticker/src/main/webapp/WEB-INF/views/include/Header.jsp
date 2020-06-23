@@ -40,7 +40,7 @@ ul li ul li:hover {background: #f9f7;}
 </head> 
 <body>
 <!-- logo -->
-<a href="homeGO" style="margin-left: 30%; " ><img src="./resources/images/logo.jpg" height="150" ></a>
+<a href="itemGO" style="margin-left: 30%; " ><img src="./resources/images/logo.jpg" height="150" ></a>
 
 
 <!-- 마이페이지/장바구니 아이콘 -->

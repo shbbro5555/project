@@ -194,6 +194,7 @@ a{text-decoration: none}
 </head>
 <body>
 <%@include file="../include/Header.jsp"%>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div id="wrap">
 	<div id="container">
 		<!-- 가운대 틀 -->
@@ -202,7 +203,7 @@ a{text-decoration: none}
 				<div class="contents_inner">
 					<!-- Pouch -->
 					<div id="Item">
-					   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">Case</h2>
+					   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">item</h2>
 						<c:forEach var="item" items="${itemList.itemList}">
 						   <ul class="ItemUL">
 						      <li style="font-size: 17px;">
