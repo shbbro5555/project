@@ -80,6 +80,7 @@ public class HomeController {
 	@RequestMapping("/shoppingCartGO")
 	public String shoppingCartGO(HttpServletRequest request, Model model, MemberVO vo, HttpSession session) {
 		System.out.println("shoppingCartGO 장바구니 페이지로 이동");
+		
 		return "member/shoppingCart";
 	}
 	

@@ -9,5 +9,6 @@
 <body>
 	<%@include file="../include/Header.jsp"%>
 	장바구니입니다.
+	^^  추후작성
 </body>
 </html>

@@ -23,7 +23,7 @@
 			
 			
 		</table>	
-			결제할금액 : parsInt(${price}
+			결제할금액 : 
 	
 </body>
 </html>

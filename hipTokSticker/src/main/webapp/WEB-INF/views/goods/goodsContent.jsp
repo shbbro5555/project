@@ -11,7 +11,19 @@
 </head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-
+//메뉴 상단고정
+$(document).ready(function(){
+    var jbOffset = $('.menuField').offset();
+    $(window).scroll(function() {
+      if ($(document).scrollTop() > jbOffset.top) {
+        $('.menuField').addClass('fixed');
+      }
+      else {
+        $('.menuField').removeClass('fixed');
+      }
+    });
+});
+//	리뷰작성 버튼
 	$(document).on('click', '#reviewBtn', function(){
 		if('${member}'==""){
 			var result=confirm("로그인창으로 가시겠습니까?");
@@ -23,6 +35,7 @@
 			goodsReviewGOForm.submit();
 		}
 	});
+//	QnA작성 버튼
 	$(document).on('click', '#QnABtn', function(){
 		if('${member}'==""){
 			var result=confirm("로그인창으로 가시겠습니까?");
@@ -34,19 +47,6 @@
 			goodsQnAGOForm.submit();
 		}
 	});
-//	메뉴 상단고정
-	$(document).ready(function(){
-        var jbOffset = $('.menuField').offset();
-        $(window).scroll(function() {
-          if ($(document).scrollTop() > jbOffset.top) {
-            $('.menuField').addClass('fixed');
-          }
-          else {
-            $('.menuField').removeClass('fixed');
-          }
-        });
-      });
-      
 //	상품 개수조절
      $(document).ready(function(){
     	var count = 0;
@@ -71,38 +71,77 @@
     		document.order_form.count.value=count;
     		document.order_form.price.value=price;
 	   	}));
-    	
-    	
+//	주문버튼
+		$(document).on('click', '#orderBtn', function(){
+			if('${member}'==""){
+				var result=confirm("로그인창으로 가시겠습니까?");
+			}
+			if (result) {
+				location.href="loginGO";
+			}
+			if('${member}'!=""){
+				if(document.order_form.count.value == "0"){
+					alert ("수량을 설정해주세요")
+				}
+				if(document.order_form.count.value != "0"){
+					if(confirm("구매 하시겠습니까?") == true){
+						order_form.submit();
+					}
+				}
+			}
+		});
+//	장바구니 버튼
+		$(document).on('click', '#cartBtn', function(){
+			if('${member}'==""){
+				var result=confirm("로그인창으로 가시겠습니까?");
+			}
+			if (result) {
+				location.href="loginGO";
+			}
+			if('${member}'!=""){
+				if(document.order_form.count.value == "0"){
+					alert ("수량을 설정해주세요")
+				}
+				if(document.order_form.count.value != "0"){
+					if(confirm("장바구니에 담겠습니까?") == true){
+						cartForm.submit();// 카트폼 만들기
+					}
+				}
+			}
+		});	
      });
 </script>
 <style>
+
 .menuField{
 	text-align: center;
     background-color: yellow;
     padding: 10px 0px;
-    width: 100%;
-    
+    width: 50%; 
 }
 .fixed{
 	position: fixed;
 	top: 0px;
 }
+.imgField,.goodsField{
+	float: left;
+	top: 250px;
+	box-sizing: border-box;
+}
 
 </style>
 <body>
 <%@include file="../include/Header.jsp"%>
-상품설명
 
-${item.name}
-${item.price}
-${item.value1}
-${item.value2}
-<div>
-	<div class=imgField style="position: relative; left: 10%; width: 300px;">
-		<img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}">
+<div class=wrap>
+
+<div class=topField>
+	<input type="text" value="${item.name}" readonly="readonly"style="position: absolute; left:38%; top:50%; text-align: center; font-size:35px;border:0;">
+	<div class=imgField style="position:relative; left:18%;">
+		<img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}" height="550px" width="550px" border="1">
 	</div>
-	<div class=field2 style="position: relative; left: 40%; margin-bottom: 60px">
-		<table style="position: relative; left 60%; top: 10%;">
+	<div class=goodsField style="position:relative; left: 40%;">
+		<table>
 			<tr>
 				<td>상품명 :${item.name}</td>
 			</tr> 
@@ -115,24 +154,29 @@ ${item.value2}
 			<tr>
 				<td>배송비: 3000원</td>
 			</tr>
-			<tr>
-			</tr>
 		</table>
 			<form action="orderFormGO" name="order_form">
 				<input type="button" value="-" id="decreaseBtn"> 
-				수량 : <input type="text" name="count" style="width: 25px; text-align:center;" readonly="readonly" value="">
+				수량 : <input type="text" name="count" id="count" style="width: 25px; text-align:center;" readonly="readonly" value="">
 				<input type="button" value="+" id="increaseBtn">
 				금액 : <input type="text" name="price" style="width: 200px; text-align:left; border: 0; " readonly="readonly" value="">
 				<input type="hidden" name="item_name" value="${item.name}">
 				<input type="hidden" name="idx" value="${item.idx}">
 				<br>
-				<input type="submit" value="구매하기"> 
+				<input type="button" value="구매하기" id="orderBtn"> 
 			</form>	
-				<input type="button" value="장바구니 담기"> <input type="button" value="♥">
-	</div>		
-</div>
+			<form action="shoppingCartGO" name="cartForm">
+				<input type="hidden" name="count" value="">
+				<input type="hidden" name="price" value="">
+				<input type="hidden" name="item_name" value="${item.name}">
+				<input type="hidden" name="idx" value="${item.idx}">
+				<input type="button" value="장바구니 담기" id="cartBtn"> 
+			</form>	
+				<input type="button" value="♥">
+	</div>
+</div>		
 
-
+<div id=bottomField>
 
 <div class="menuField">
 	<table>
@@ -281,4 +325,7 @@ ${item.value2}
 		</c:if>
 </div>
 
+</div>
+
+</div>
 </body>
