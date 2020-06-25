@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	장바구니입니다.
 	^^  추후작성
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>

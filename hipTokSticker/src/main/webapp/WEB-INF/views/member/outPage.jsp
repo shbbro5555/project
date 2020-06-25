@@ -34,7 +34,7 @@
 </style>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<div class="memberInfo">
 	<h1>회원 탈퇴</h1>
 	<form action="memberOutDO" method="post" name="outForm">
@@ -50,5 +50,6 @@
 		<input type="button" value="탈퇴하기" onclick="check()">
 	</form>
 	</div>
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>

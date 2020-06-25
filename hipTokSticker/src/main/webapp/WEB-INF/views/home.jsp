@@ -193,7 +193,8 @@ a{text-decoration: none}
 
 </head>
 <body>
-<%@include file="./include/Header.jsp"%>
+<%@include file="./include/header.jsp"%>
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div id="wrap">
 	<div id="container">
@@ -267,6 +268,6 @@ a{text-decoration: none}
 			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
 		</c:if>
 
-
+<%@include file="./include/footer.jsp"%>
 </body>
 </html>

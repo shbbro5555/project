@@ -10,6 +10,7 @@
 	var pri
 
 </script>
+<%@include file="../include/header.jsp"%>
 <body>
 		<h2>주문내용</h2>
 		
@@ -24,6 +25,6 @@
 			
 		</table>	
 			결제할금액 : 
-	
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

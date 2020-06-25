@@ -110,7 +110,7 @@ function joinCheck() {
 <title>회원가입</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<h1>회원가입</h1>
 	<form action="joinDO" method="post" name="loginForm" onsubmit="return joinCheck()" >
 			<p>
@@ -152,6 +152,6 @@ function joinCheck() {
 			</p>
 		
 	</form>
-		
+		<%@include file="../include/footer.jsp"%>
 </body>
 </html>

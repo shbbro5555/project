@@ -36,6 +36,8 @@ ul li ul li {
 ul li ul li a {display:block !important;} 
 ul li ul li:hover {background: #f9f7;}
 
+header,section,footer{display:block;}
+section{margin-bottom: 300px; margin-top: 150px;}
 </style>
 </head> 
 <body>
@@ -53,7 +55,7 @@ ul li ul li:hover {background: #f9f7;}
 	<c:if test="${member != null }">
 		<a href="myPageGO?userId=${member.userId}" style="margin-left: 80%; height= 50;"><img src="./resources/images/login_icon.png" 
 		onmouseover="this.src='./resources/images/login_icon2.png'" onmouseout="this.src='./resources/images/login_icon.png'"height="30" ></a>
-		<a href="shoppingCartGO" ><img src="./resources/images/cart_icon.png" 
+		<a href="shoppingCartGO?userId=${member.userId}" ><img src="./resources/images/cart_icon.png" 
 		onmouseover="this.src='./resources/images/cart_icon2.png'" onmouseout="this.src='./resources/images/cart_icon.png'" height="30"></a>
 		<a href="logoutDO"><img src="./resources/images/logout_icon.png" 
 		onmouseover="this.src='./resources/images/logout_icon2.png'" onmouseout="this.src='./resources/images/logout_icon.png'" height="30"></a>

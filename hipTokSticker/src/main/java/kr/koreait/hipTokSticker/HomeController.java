@@ -73,18 +73,7 @@ public class HomeController {
 		System.out.println("introductionGo (사이트소개)페이지로 이동");
 		return "introduction";
 	}
-/**
- * 		
- * @return	장바구니로 이동합니다. (아직기능구현안함)
- */
-	@RequestMapping("/shoppingCartGO")
-	public String shoppingCartGO(HttpServletRequest request, Model model, MemberVO vo, HttpSession session) {
-		System.out.println("shoppingCartGO 장바구니 페이지로 이동");
-		
-		return "member/shoppingCart";
-	}
-	
-	
+
 }
 
 

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../include/Header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <div>
 	<form action="goodsQnAWriteDO" method="post">
 			<input type="hidden" value="${member.userId}" name="userId">
@@ -22,6 +22,8 @@
 		</table>
 		<input type="submit" value="등록하기">
 	</form>
+	
+	<%@include file="../include/footer.jsp"%>
 </div>
 </body>
 </html>

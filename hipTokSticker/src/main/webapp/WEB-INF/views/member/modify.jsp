@@ -51,7 +51,7 @@ function joinCheck() {
 <title>수정하기</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<div class="memberInfo">
 	<h1>수정하기</h1>
 		<form action="memberModifyDO" method="post" name="modifyform" onsubmit="return joinCheck()" >
@@ -89,6 +89,6 @@ function joinCheck() {
 		</form>
 	</div>
 	
-		
+		<%@include file="../include/footer.jsp"%>
 </body>
 </html>

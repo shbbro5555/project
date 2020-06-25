@@ -386,6 +386,19 @@
 			]]>   
 	</select>
 	
+	<!-- 장바구니 담기 -->
+	<select id="shoppingCartDO" parameterType="kr.koreait.vo.ShoppingCartVO" resultType="kr.koreait.vo.ShoppingCartVO">
+    	insert into SHOPPINGCART(idx, userid, goodsidx, count)
+    	values(shoppingCart_seq.nextval, #{userId}, #{goodsIdx}, #{count})	
+	
+	</select>
+	
+	<!-- 장바구니 상품 개수 -->
+	<select id="cartCount" parameterType="String" resultType="int">
+		select count(*) from goodsreview where userId= #{userId}
+	</select>
+
+	
 </mapper>
 	
 

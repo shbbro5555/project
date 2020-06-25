@@ -30,7 +30,7 @@ h1{text-align: center}
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<c:if test="${check}">
 		<script type="text/javascript">
 			alert("아이디랑 비밀번호를 확인해주세요")
@@ -56,7 +56,7 @@ h1{text-align: center}
 	<form action="joinGO">
 		<input type="submit" value="회원가입">
 	</form>
-
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>
 

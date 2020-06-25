@@ -52,6 +52,7 @@ $(document).ready(function(){
     	var count = 0;
     	var price = 0;
     	document.order_form.count.value=count;
+    	document.cartForm.count.value=count;
     	document.order_form.price.value=price;
     	if($(document).on('click', '#decreaseBtn', function(){
     		if(count < 1){
@@ -61,6 +62,7 @@ $(document).ready(function(){
     			count = count - 1;
     			price = price - parseInt('${item.price}');
     			document.order_form.count.value=count;
+    			document.cartForm.count.value=count;
     			document.order_form.price.value=price;
     		}
     	}));
@@ -69,6 +71,7 @@ $(document).ready(function(){
     		count = count + 1;
     		price = price + parseInt('${item.price}');
     		document.order_form.count.value=count;
+    		document.cartForm.count.value=count;
     		document.order_form.price.value=price;
 	   	}));
 //	주문버튼
@@ -105,6 +108,7 @@ $(document).ready(function(){
 				if(document.order_form.count.value != "0"){
 					if(confirm("장바구니에 담겠습니까?") == true){
 						cartForm.submit();// 카트폼 만들기
+						alert("장바구니 담기 완료.")
 					}
 				}
 			}
@@ -116,34 +120,33 @@ $(document).ready(function(){
 .menuField{
 	text-align: center;
     background-color: yellow;
-    padding: 10px 0px;
-    width: 50%; 
 }
 .fixed{
 	position: fixed;
 	top: 0px;
 }
-.imgField,.goodsField{
+.imgField{
 	float: left;
-	top: 250px;
-	box-sizing: border-box;
 }
+.topField,.bottomField{display: block;}
+
 
 </style>
 <body>
-<%@include file="../include/Header.jsp"%>
-
+<%@include file="../include/header.jsp"%>
+<section>
 <div class=wrap>
-
 <div class=topField>
-	<input type="text" value="${item.name}" readonly="readonly"style="position: absolute; left:38%; top:50%; text-align: center; font-size:35px;border:0;">
-	<div class=imgField style="position:relative; left:18%;">
+	<div>
+	<input type="text" value="${item.name}" readonly="readonly"style="text-align: center; font-size:35px;border:0; position: relative; left: 37%;">
+	</div>
+	<div class=imgField style="position: relative; left:20%;">
 		<img src="${pageContext.request.contextPath}/resources/upload/${item.fileName}" height="550px" width="550px" border="1">
 	</div>
-	<div class=goodsField style="position:relative; left: 40%;">
+	<div class=goodsField style="height:550px; position: relative; left:30%;">
 		<table>
 			<tr>
-				<td>상품명 :${item.name}</td>
+				<td><h2>상품명 :${item.name}</h2></td>
 			</tr> 
 			<tr>
 				<td>가격 :${item.price}</td>
@@ -165,11 +168,10 @@ $(document).ready(function(){
 				<br>
 				<input type="button" value="구매하기" id="orderBtn"> 
 			</form>	
-			<form action="shoppingCartGO" name="cartForm">
+			<form action="shoppingCartDO" name="cartForm">
+				<input type="hidden" name="userId" value="${member.userId}">
+				<input type="hidden" name="goodsIdx" value="${item.idx}">
 				<input type="hidden" name="count" value="">
-				<input type="hidden" name="price" value="">
-				<input type="hidden" name="item_name" value="${item.name}">
-				<input type="hidden" name="idx" value="${item.idx}">
 				<input type="button" value="장바구니 담기" id="cartBtn"> 
 			</form>	
 				<input type="button" value="♥">
@@ -326,6 +328,7 @@ $(document).ready(function(){
 </div>
 
 </div>
-
 </div>
+</section>
+<%@include file="../include/footer.jsp"%>
 </body>

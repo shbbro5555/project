@@ -19,6 +19,8 @@ import kr.koreait.vo.BoardList;
 import kr.koreait.vo.GoodsQnAVO;
 import kr.koreait.vo.GoodsReviewVO;
 import kr.koreait.vo.GoodsVO;
+import kr.koreait.vo.MemberVO;
+import kr.koreait.vo.ShoppingCartVO;
 @Controller
 public class GoodsController {
 	
@@ -45,7 +47,6 @@ public class GoodsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(vo);
 		mapper.uploadFormDO(vo);
 		model.addAttribute("file", file);
 		
@@ -72,7 +73,6 @@ public class GoodsController {
 		boardList.setHmap(hmap);
 		System.out.println("개수: " + totalCount + " boardList :" + boardList);
 		boardList.setItemList(mapper.itemList(boardList));
-		System.out.println(boardList);
 		model.addAttribute("itemList", boardList);
 		
 		return "/goods/item";
@@ -102,9 +102,7 @@ public class GoodsController {
 		hmap.put("startNo", boardList.getStartNo());
 		hmap.put("endNo", boardList.getEndNo());
 		boardList.setHmap(hmap);
-		System.out.println("개수: " + totalCount + " boardList :" + boardList);
 		boardList.setReviewList(mapper.goodsReviewList(boardList));
-		System.out.println(boardList);
 		model.addAttribute("reviewList", boardList);
 //	QnA 페이징
 		totalCount = mapper.goodsQnACount(boardList);
@@ -116,14 +114,11 @@ public class GoodsController {
 		hmap.put("startNo", boardList.getStartNo());
 		hmap.put("endNo", boardList.getEndNo());
 		boardList.setHmap(hmap);
-		System.out.println("개수: " + totalCount + " boardList :" + boardList);
 		boardList.setGoodsQnAList(mapper.goodsQnAList(boardList));
-		System.out.println(boardList);
 		model.addAttribute("QnAList", boardList);
 		
 		return "/goods/goodsContent";
 	}
-	
 	
 	@RequestMapping("/goodsReviewWriteGO")
 	public String goodsReviewWriteGO(HttpServletRequest request, Model model, HttpSession session) {
@@ -143,7 +138,6 @@ public class GoodsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(vo);
 		model.addAttribute("file", file);
 		mapper.goodsReviewWriteDO(vo);
 		return "redirect:goodsContentGO?idx="+request.getParameter("main_idx");
@@ -155,13 +149,8 @@ public class GoodsController {
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
 		vo = mapper.selectGoodsReview(idx);
 		model.addAttribute("review", vo);
-		System.out.println(vo);
 		return "/goods/goodsReviewContent";
 	}
-	
-	
-	
-
 	
 	@RequestMapping("/goodsQnAWriteGO")
 	public String goodsQnAWriteGO(HttpServletRequest request, Model model, HttpSession session) {
@@ -176,7 +165,6 @@ public class GoodsController {
 		System.out.println("goodsQnAWriteDO QnA등록하기");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
 		
-		System.out.println(vo);
 		mapper.goodsQnAWriteDO(vo);
 		return "redirect:goodsContentGO?idx="+request.getParameter("main_idx");
 	}
@@ -189,7 +177,6 @@ public class GoodsController {
 		String item_name = request.getParameter("item_name");
 		int count = Integer.parseInt(request.getParameter("count"));
 		int price = Integer.parseInt(request.getParameter("price"));
-		System.out.println(item_name + count + price);
 		
 		model.addAttribute("item_name", item_name);
 		model.addAttribute("count", count);
@@ -198,6 +185,41 @@ public class GoodsController {
 		return "/goods/order";
 	}
 	
+	@RequestMapping("/shoppingCartDO")
+		public String shoppingCartDO(HttpServletRequest request, Model model, HttpSession session, ShoppingCartVO vo) {
+		System.out.println("shoppingCartDO 장바구니 담기 메서드 실행");
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		String count = request.getParameter("count");
+		System.out.println(count);
+		mapper.shoppingCartDO(vo);
+		return "redirect:goodsContentGO?idx="+request.getParameter("goodsIdx");
+	}
+	@RequestMapping("/shoppingCartGO")
+	public String shoppingCartGO(HttpServletRequest request, Model model, ShoppingCartVO vo, HttpSession session, BoardList boardList) {
+		System.out.println("shoppingCartGO 장바구니 페이지로 이동");
+		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		
+		String userId = request.getParameter("userId");
+		int pageSize = 10;
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch(NumberFormatException e) { }
+		int totalCount = mapper.cartCount(userId);
+		
+		boardList.initBoardList(pageSize, totalCount, currentPage);
+		
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+		hmap.put("startNo", boardList.getStartNo());
+		hmap.put("endNo", boardList.getEndNo());
+		boardList.setHmap(hmap);
+		System.out.println("개수: " + totalCount + " boardList :" + boardList);
+		boardList.setShoppingCartList(mapper.cartList(boardList));
+		model.addAttribute("cartList", boardList);
+
+		
+		return "member/shoppingCart";
+	}
 	
 	@RequestMapping("/pouchGO")
 	public String pouchGO(HttpServletRequest request, Model model, HttpSession session) {

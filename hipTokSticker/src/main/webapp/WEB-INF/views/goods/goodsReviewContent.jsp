@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
 	<img src="${pageContext.request.contextPath}/resources/upload/s/s_${review.filename}">
 	<table style="border: 1">
 		<tr>
@@ -34,5 +35,6 @@
 			</td>
 		</tr>
 	</table>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

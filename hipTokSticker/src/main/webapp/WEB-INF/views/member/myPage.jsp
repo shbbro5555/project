@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<div class="memberInfo">
 		<h1>회원정보</h1>
 		
@@ -107,6 +107,7 @@
 		
 		<p>주문목록</p>
 	</div>
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>
 

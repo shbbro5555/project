@@ -199,8 +199,7 @@ a{text-decoration: none}
 
 </head>
 <body>
-<%@include file="../include/Header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
+<%@include file="../include/header.jsp"%>
 <div id="wrap">
 	<div id="container">
 		<!-- 왼쪽 틀 -->
@@ -335,5 +334,6 @@ a{text-decoration: none}
 		</div>
 	</div>
 </div>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

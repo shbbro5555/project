@@ -98,7 +98,7 @@ a{text-decoration: none}
 </style>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 <div id="wrap">
 	<div id="container">
 		<!-- 가운대 틀 -->
@@ -179,5 +179,6 @@ a{text-decoration: none}
 		</div>
 	</div>
 </div>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

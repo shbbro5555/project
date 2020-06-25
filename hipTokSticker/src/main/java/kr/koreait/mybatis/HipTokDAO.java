@@ -12,6 +12,7 @@ import kr.koreait.vo.NoticeComment;
 import kr.koreait.vo.NoticeVO;
 import kr.koreait.vo.QnAComment;
 import kr.koreait.vo.QnAVO;
+import kr.koreait.vo.ShoppingCartVO;
 
 /**
  *  컨트롤러에서  메서드들을 받아와서 mappers로 보내주는 DAO입니다.
@@ -176,6 +177,15 @@ public interface HipTokDAO {
 	int goodsQnACount(BoardList boardList);
 //	상품  QnA 목록
 	ArrayList<GoodsQnAVO> goodsQnAList(BoardList boardList);
+	
+//	장바구니 담기
+	void shoppingCartDO(ShoppingCartVO vo);
+	
+//	장바구니 상품 개수
+	int cartCount(String userId);
+	
+//	장바구니 상품 페이징
+	ArrayList<ShoppingCartVO> cartList(BoardList boardList);
 
 
 

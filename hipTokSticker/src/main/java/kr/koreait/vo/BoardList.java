@@ -9,6 +9,7 @@ public class BoardList {
    private ArrayList<GoodsVO> itemList = new ArrayList<GoodsVO>();
    private ArrayList<GoodsReviewVO> reviewList = new ArrayList<GoodsReviewVO>();
    private ArrayList<GoodsQnAVO> goodsQnAList = new ArrayList<GoodsQnAVO>();
+   private ArrayList<ShoppingCartVO> shoppingCartList = new ArrayList<ShoppingCartVO>();
    
    private int idx;
    
@@ -105,7 +106,15 @@ public String getUserId() {
 	public void setGoodsQnAList(ArrayList<GoodsQnAVO> goodsQnAList) {
 		this.goodsQnAList = goodsQnAList;
 	}
-	
+
+	public ArrayList<ShoppingCartVO> getShoppingCartList() {
+		return shoppingCartList;
+	}
+
+	public void setShoppingCartList(ArrayList<ShoppingCartVO> shoppingCartList) {
+		this.shoppingCartList = shoppingCartList;
+	}
+
 	public String getSearchType() {
 			return searchType;
 	}
@@ -197,17 +206,12 @@ public String getUserId() {
 	@Override
 	public String toString() {
 		return "BoardList [noticeList=" + noticeList + ", qnaList=" + qnaList + ", itemList=" + itemList
-				+ ", reviewList=" + reviewList + ", goodsQnAList=" + goodsQnAList + ", idx=" + idx + ", pageSize="
-				+ pageSize + ", totalCount=" + totalCount + ", totalPage=" + totalPage + ", currentPage=" + currentPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", userId=" + userId + ", searchType=" + searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
+				+ ", reviewList=" + reviewList + ", goodsQnAList=" + goodsQnAList + ", shoppingCartList="
+				+ shoppingCartList + ", idx=" + idx + ", pageSize=" + pageSize + ", totalCount=" + totalCount
+				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNo=" + startNo + ", endNo="
+				+ endNo + ", startPage=" + startPage + ", endPage=" + endPage + ", userId=" + userId + ", searchType="
+				+ searchType + ", keyWord=" + keyWord + ", hmap=" + hmap + "]";
 	}
-
-	
-
-	
-
-	
 
 
 

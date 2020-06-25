@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="../include/Header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <div>
 	<form action="goodsReviewWriteDO" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${member.userId}" name="userId">
@@ -51,5 +51,6 @@
 		<input type="submit" value="등록하기">
 	</form>
 </div>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>
