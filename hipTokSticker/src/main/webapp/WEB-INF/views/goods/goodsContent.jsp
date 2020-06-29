@@ -163,8 +163,8 @@ $(document).ready(function(){
 				수량 : <input type="text" name="count" id="count" style="width: 25px; text-align:center;" readonly="readonly" value="">
 				<input type="button" value="+" id="increaseBtn">
 				금액 : <input type="text" name="price" style="width: 200px; text-align:left; border: 0; " readonly="readonly" value="">
-				<input type="hidden" name="item_name" value="${item.name}">
-				<input type="hidden" name="idx" value="${item.idx}">
+				<input type="hidden" name="itemName" value="${item.name}">
+				<input type="hidden" name="itemIdx" value="${item.idx}">
 				<br>
 				<input type="button" value="구매하기" id="orderBtn"> 
 			</form>	

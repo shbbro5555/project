@@ -20,7 +20,7 @@ html, body { width: 100%; height: 100%; }
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<%@include file="../include/footer.jsp"%>
 	<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
 

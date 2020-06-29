@@ -333,6 +333,49 @@
 			]]>   
 	</select>
 	
+	<!-- 파우치 갯수 -->
+	<select id="pouchCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from goods where value1 = '파우치'
+	</select>
+	<!-- 파우치만 페이징처리 -->
+	<select id="pouchList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goods order by idx desc ) AA where rownum <= #{endNo}
+			) where rnum >= #{startNo} and value1='파우치'
+			]]>   
+	</select>
+
+	<!-- 스티커 갯수 -->
+	<select id="stickerCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from goods where value1 = '스티커'
+	</select>
+	<!-- 스티커만 페이징처리 -->
+	<select id="stickerList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goods order by idx desc ) AA where rownum <= #{endNo}
+			) where rnum >= #{startNo} and value1='스티커'
+			]]>   
+	</select>
+	 
+	<!-- 케이스 갯수 -->
+	<select id="caseCount" parameterType="kr.koreait.vo.BoardList" resultType="int">
+		select count(*) from goods where value1 = '케이스'
+	</select>
+	<!-- 스티커만 페이징처리 -->
+	<select id="caseList" parameterType="kr.koreait.vo.BoardList" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+		select * from (
+		   select rownum rnum, AA.* from (   
+		      select * from goods order by idx desc ) AA where rownum <= #{endNo}
+			) where rnum >= #{startNo} and value1='케이스'
+			]]>   
+	</select>
+
+
 	<!-- 상품1개 보여주기 -->
 	<select id="goodsContentGO" parameterType="int" resultType="kr.koreait.vo.GoodsVO">
 		select * from goods where idx = #{idx}
@@ -398,6 +441,16 @@
 		select count(*) from goodsreview where userId= #{userId}
 	</select>
 
+	<!-- 주문하기 -->
+	<insert id="itemOrderDO" parameterType="kr.koreait.vo.ItemOrderVO">
+		insert into itemOrder(idx, userId, userName, price, addressNum, address, phoneNum, email, request) 
+		values(itemorder_seq.nextval, #{userId}, #{userName}, #{price}, #{addressNum}, #{address}, #{phoneNum}, #{email}, #{request})
+	</insert>
+	
+	<!-- 마이페이지에 내가 주문한 상품 목록 보여주기 -->
+	<select id="showOrder" parameterType="String" resultType="kr.koreait.vo.ItemOrderVO">
+		select * from itemOrder where userId= #{userId}
+	</select>
 	
 </mapper>
 	

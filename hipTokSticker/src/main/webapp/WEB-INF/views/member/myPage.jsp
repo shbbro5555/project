@@ -105,7 +105,19 @@
 			</tr>
 	</table>			
 		
-		<p>주문목록</p>
+		<h2>주문목록</h2>
+		<table border="1">
+			<tr>
+				<td>상품이름</td>
+				<td>갯수</td>
+				<td>결제금액</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>${order.price }</td>
+				<td></td>
+			</tr>
+		</table>
 	</div>
 	<%@include file="../include/footer.jsp"%>
 </body>

@@ -44,7 +44,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	<%@include file="../include/footer.jsp"%>
 		<c:if test="${member.userId eq qna.userId}">
 			<form action="QnAModifyGO" method="post" id="QnAModifyForm">

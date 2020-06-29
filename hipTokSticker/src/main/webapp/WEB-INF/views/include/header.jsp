@@ -22,7 +22,6 @@ ul {
   padding: 0;
 }
 ul li {display: inline-block;}
-ul li:hover {background: yellow;}
 ul li:hover ul {display: block;}
 ul li ul {
 	  position: absolute;

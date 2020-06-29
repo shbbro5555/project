@@ -56,7 +56,7 @@ function goWrite() {
 </style>
 </head>
 <body>
-<%@include file="../include/Header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <%@include file="../include/footer.jsp"%>
 <h2 style="text-align: center;">QnA 작성</h2><br><br>
 

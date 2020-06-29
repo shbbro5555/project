@@ -7,6 +7,7 @@ import kr.koreait.vo.BoardList;
 import kr.koreait.vo.GoodsQnAVO;
 import kr.koreait.vo.GoodsReviewVO;
 import kr.koreait.vo.GoodsVO;
+import kr.koreait.vo.ItemOrderVO;
 import kr.koreait.vo.MemberVO;
 import kr.koreait.vo.NoticeComment;
 import kr.koreait.vo.NoticeVO;
@@ -146,12 +147,22 @@ public interface HipTokDAO {
 	void uploadFormDO(GoodsVO vo);
 	
 	
-//	상품 보여주기
+//	전체상품 보여주기
 	int itemCount(BoardList boardList);
-	
 	ArrayList<GoodsVO> itemList(BoardList boardList);
 	
+//	pouch창
+	int pouchCount(BoardList boardList);
+	ArrayList<GoodsVO> pouchList(BoardList boardList);
 
+//	sticker창
+	int stickerCount(BoardList boardList);
+	ArrayList<GoodsVO> stickerList(BoardList boardList);
+
+//	case창
+	int caseCount(BoardList boardList);
+	ArrayList<GoodsVO> caseList(BoardList boardList);
+	
 //	상품 내용창으로
 	GoodsVO goodsContentGO(int idx);
 	
@@ -186,6 +197,15 @@ public interface HipTokDAO {
 	
 //	장바구니 상품 페이징
 	ArrayList<ShoppingCartVO> cartList(BoardList boardList);
+	
+//	주문하기 
+	void itemOrderDO(ItemOrderVO vo);
+	
+//	마이페이지에서 내가 구매한 아이템 불러오기
+	void showOrder(String userId);
+	
+
+	
 
 
 

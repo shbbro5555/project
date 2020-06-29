@@ -105,7 +105,7 @@ public class MemberController {
  * @return	마이페이지로 이동합니다.
  */
 	@RequestMapping(value="/myPageGO", method = RequestMethod.GET)
-	public String myPageGO(HttpServletRequest request, Model model, MemberVO vo, HttpSession session, BoardList boardList) {
+	public String myPageGO(HttpServletRequest request, Model model, HttpSession session, BoardList boardList) {
 		System.out.println("myPageGO(마이페이지) 페이지로");
 		
 		// 내가쓴 글을 받아온다.
@@ -129,6 +129,10 @@ public class MemberController {
 		boardList.setQnaList(mapper.searchMyWrite(boardList));
 		System.out.println(boardList);
 		model.addAttribute("MyWrite", boardList);
+		
+		String userId= request.getParameter("userId");
+		mapper.showOrder(userId);
+		model.addAttribute("order", userId);
 		return "/member/myPage";
 	}
 /**

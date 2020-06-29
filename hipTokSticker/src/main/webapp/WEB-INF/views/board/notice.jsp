@@ -60,7 +60,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../include/Header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 	
 	<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
 
