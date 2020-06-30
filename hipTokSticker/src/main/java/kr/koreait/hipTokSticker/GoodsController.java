@@ -299,7 +299,6 @@ public class GoodsController {
 		return "member/shoppingCart";
 	}
 	
-	
 	@RequestMapping("/itemOrderDO")
 	public String itemOrderDO(HttpServletRequest request, Model model, HttpSession session, ItemOrderVO vo ) {
 		System.out.println("itemOrderDO 주문하기");

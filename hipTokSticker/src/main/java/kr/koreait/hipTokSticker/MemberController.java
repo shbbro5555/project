@@ -131,6 +131,8 @@ public class MemberController {
 		model.addAttribute("MyWrite", boardList);
 		
 		
+	//여기부터
+		
 		String userId= request.getParameter("userId");
 		mapper.showOrder(userId);
 		model.addAttribute("order", userId);
