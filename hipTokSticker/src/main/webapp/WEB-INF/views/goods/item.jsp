@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +11,21 @@
 
 <style type="text/css">
 
+.paging_container{
+position: relative; 
+left : 50%;
+transform: translate(-50%);
+background-color: yellow;
+height: 50px;
+width: 700px;
+}
+.paging_box{
+	position: absolute;
+	max-width:423px;
+	left: 50%;
+	transform: translate(-50%);
+	background-color: red;
+}
 </style>
 
 </head>
@@ -23,11 +41,20 @@
 		      <li style="font-size: 17px; width: 500px; height: 400px;">
 		         <a href="goodsContentGO?idx=${item.idx}">
 		            <!--   img태그에 넣고싶은 사진 넣기   -->
-		            <img src="${pageContext.request.contextPath}/resources/upload/s/s_${item.fileName}"height="430px" width="430px" 
-		            style="border: 1px solid black;">
-		            <!--   신상옷의 각각의 제목 적는 곳  -->
+					<c:if test="${item.stock == 0 }">
+		             <img 
+		            src="${pageContext.request.contextPath}/resources/upload/s/s_${item.fileName}"height="430px" width="430px" 
+		            style="border: 1px solid black; opacity: 0.4;"> 
+		            <br>
+	    	        <span class="itemName">${item.name} (품절입니다 ㅠㅠ)</span>
+					</c:if>	      
+					<c:if test="${item.stock != 0 }">
+		            <img 
+		            src="${pageContext.request.contextPath}/resources/upload/s/s_${item.fileName}"height="430px" width="430px" 
+		            style="border: 1px solid black;"> 
 		            <br>
 	    	        <span class="itemName">${item.name}</span>
+					</c:if>	      
 	    	        <br>
 	            	<span>${item.price}원</span>
 	        	 </a>
@@ -36,7 +63,8 @@
 		</c:forEach>
 </div>
 <br><br><br>
-<div class=pagingBtn style="position: relative; left : 45%;">
+<div class=paging_container>
+	<div class=paging_box>
 		<!-- 처음으로, 10페이지 앞으로 -->
 		<c:if test="${itemList.startPage > 1}">
 			<input type="button" value="＜＜" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
@@ -73,6 +101,7 @@
 				<input type="button" value="＞" disabled="disabled" title="다음 10 페이지가 없습니다."/>
 			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
 		</c:if>
+	</div>
 </div>
 <%@include file="../include/footer.jsp"%>
 </body>

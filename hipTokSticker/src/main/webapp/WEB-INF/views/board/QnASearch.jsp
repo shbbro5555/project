@@ -59,7 +59,6 @@ html, body { width: 100%; height: 100%; }
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
 	<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
 
 	<h1 style="text-align: center; font-family: ">QnA</h1>
@@ -159,5 +158,6 @@ html, body { width: 100%; height: 100%; }
 		</c:if>
 	</div>
 	</div>
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>

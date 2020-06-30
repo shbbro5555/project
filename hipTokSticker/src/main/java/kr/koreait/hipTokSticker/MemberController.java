@@ -130,6 +130,7 @@ public class MemberController {
 		System.out.println(boardList);
 		model.addAttribute("MyWrite", boardList);
 		
+		
 		String userId= request.getParameter("userId");
 		mapper.showOrder(userId);
 		model.addAttribute("order", userId);

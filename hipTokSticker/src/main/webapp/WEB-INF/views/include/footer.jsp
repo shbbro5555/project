@@ -15,13 +15,13 @@
 <div>
   <div>
   <table>
-	    <tr>
+	    <tr style="position: relative; left: 30%">
 		   <td>CUSTOMER SERVICE</td>
 		   <td>BANK ACCOUNT</td>
 		   <td>SHOWROOM</td>
 		   <td> BUSINESS HOURS</td> 
 		</tr>
-	   <tr>
+	   <tr style="position: relative; left: 50%">
 	   <td> tue - fri / 2pm - 7pm<br/>
 	  	  	sat - mon , holiday / OFF<br/>
 	    	주말 및 월요일은 휴무입니다.

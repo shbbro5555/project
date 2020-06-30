@@ -45,7 +45,6 @@
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
 		<c:if test="${member.userId eq qna.userId}">
 			<form action="QnAModifyGO" method="post" id="QnAModifyForm">
 				<input type="button" value="수정하기" id="QnAModifyBtn">	
@@ -104,6 +103,6 @@
 		</table>
 	</div>
 	
-	
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html> 	

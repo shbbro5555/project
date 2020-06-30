@@ -48,31 +48,31 @@ $(document).ready(function(){
 		}
 	});
 //	상품 개수조절
-     $(document).ready(function(){
-    	var count = 0;
-    	var price = 0;
-    	document.order_form.count.value=count;
-    	document.cartForm.count.value=count;
-    	document.order_form.price.value=price;
-    	if($(document).on('click', '#decreaseBtn', function(){
-    		if(count < 1){
-    			alert("수량은 0개이하로 설정할 수 없습니다.");
-    		}
-    		else{
-    			count = count - 1;
-    			price = price - parseInt('${item.price}');
-    			document.order_form.count.value=count;
-    			document.cartForm.count.value=count;
-    			document.order_form.price.value=price;
-    		}
-    	}));
-    	
-    	if($(document).on('click', '#increaseBtn', function(){
-    		count = count + 1;
-    		price = price + parseInt('${item.price}');
-    		document.order_form.count.value=count;
-    		document.cartForm.count.value=count;
-    		document.order_form.price.value=price;
+    $(document).ready(function(){
+   	var count = 0;
+   	var price = 0;
+   	document.order_form.count.value=count;
+   	document.cartForm.count.value=count;
+   	document.order_form.price.value=price;
+   	if($(document).on('click', '#decreaseBtn', function(){
+   		if(count < 1){
+   			alert("수량은 0개 미만으로 설정할 수 없습니다.");
+   		}
+   		else{
+   			count = count - 1;
+   			price = price - parseInt('${item.price}');
+   			document.order_form.count.value=count;
+   			document.cartForm.count.value=count;
+   			document.order_form.price.value=price;
+   		}
+   	}));
+   	
+   	if($(document).on('click', '#increaseBtn', function(){
+   		count = count + 1;
+   		price = price + parseInt('${item.price}');
+   		document.order_form.count.value=count;
+   		document.cartForm.count.value=count;
+   		document.order_form.price.value=price;
 	   	}));
 //	주문버튼
 		$(document).on('click', '#orderBtn', function(){
@@ -83,10 +83,15 @@ $(document).ready(function(){
 				location.href="loginGO";
 			}
 			if('${member}'!=""){
+				var ok = parseInt('${item.stock}') - count;				
+					
 				if(document.order_form.count.value == "0"){
-					alert ("수량을 설정해주세요")
+					alert ("수량을 설정해주세요");
 				}
-				if(document.order_form.count.value != "0"){
+				if(ok <0){
+					alert("재고가 부족합니다.");
+				}
+				if(document.order_form.count.value != "0" && ok >= 0){
 					if(confirm("구매 하시겠습니까?") == true){
 						order_form.submit();
 					}
@@ -146,7 +151,7 @@ $(document).ready(function(){
 	<div class=goodsField style="height:550px; position: relative; left:30%;">
 		<table>
 			<tr>
-				<td><h2>상품명 :${item.name}</h2></td>
+				<td><h2>상품명 :${item.name}</h2></td><td> 재고량 : ${item.stock}</td>
 			</tr> 
 			<tr>
 				<td>가격 :${item.price}</td>
@@ -174,7 +179,7 @@ $(document).ready(function(){
 				<input type="hidden" name="count" value="">
 				<input type="button" value="장바구니 담기" id="cartBtn"> 
 			</form>	
-				<input type="button" value="♥">
+
 	</div>
 </div>		
 

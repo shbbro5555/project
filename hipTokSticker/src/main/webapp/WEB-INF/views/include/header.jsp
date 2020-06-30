@@ -41,7 +41,7 @@ section{margin-bottom: 300px; margin-top: 150px;}
 </head> 
 <body>
 <!-- logo -->
-<a href="itemGO" style="margin-left: 30%; " ><img src="./resources/images/logo.jpg" height="150" ></a>
+<a href="itemGO" style="margin-left: 27%; " ><img src="./resources/images/logo.jpg" height="150" ></a>
 
 
 <!-- 마이페이지/장바구니 아이콘 -->
@@ -65,7 +65,7 @@ section{margin-bottom: 300px; margin-top: 150px;}
 	</c:if>
 <div class="menu filed">
   <ul>
-    <li style="position: relative; left: 10%;">
+    <li style="position: relative; left: 32%;">
       <a href="#" >Category</a>
       <ul>
         <li><a href="pouchGO">Pouch</a></li>
@@ -78,20 +78,13 @@ section{margin-bottom: 300px; margin-top: 150px;}
   </ul>
   
  <ul>
-    <li style="position: relative; left: 35%;">
+    <li style="position: relative; left: 40%;">
       <a href="introductionGO" >About</a>
-      <ul>
-       <li><a href="#">이더블유케이 d</a></li>
-        <li><a href="#">떡상</a></li>
-        <li><a href="#">대한제강</a></li>
-       	<li><a href="#">상한가</a></li>
-       	<li><a href="#">가즈아~</a></li>
-      </ul>
     </li>
  </ul>
  
  <ul>
-    <li style="position: relative; left: 65%;">
+    <li style="position: relative; left: 47%;">
       <a href="#" >Board</a>
       <ul>
         <li><a href="noticeGO">Notice</a></li>

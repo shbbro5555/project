@@ -52,7 +52,6 @@ function goWrite() {
 </head>
 <body>
 <%@include file="../include/header.jsp"%>
-<%@include file="../include/footer.jsp"%>
 <h2 style="text-align: center;">공지글 작성</h2><br><br>
 
 <div style="width: 60%; margin: auto; background: white;">
@@ -65,6 +64,6 @@ function goWrite() {
 		<input type="button" style="float: right;" value="글 작성" onclick="goWrite()">
 	</form>
 </div>
-
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

@@ -201,6 +201,8 @@ public interface HipTokDAO {
 //	주문하기 
 	void itemOrderDO(ItemOrderVO vo);
 	
+//	재고량빼주기
+	void decreaseStock(ItemOrderVO vo);
 //	마이페이지에서 내가 구매한 아이템 불러오기
 	void showOrder(String userId);
 	

@@ -60,7 +60,6 @@
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
 	<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
 
 	<div class="ListTable">
@@ -144,6 +143,6 @@
 			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
 		</c:if>
 	</div>
-	
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>

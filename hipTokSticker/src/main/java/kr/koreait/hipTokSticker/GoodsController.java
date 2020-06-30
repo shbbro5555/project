@@ -58,7 +58,7 @@ public class GoodsController {
 	public String itemGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
 		System.out.println("itemGO 상품창으로");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		int pageSize = 9;
+		int pageSize = 18;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -83,7 +83,7 @@ public class GoodsController {
 	public String pouchGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
 		System.out.println("pouchGO 상품창으로");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		int pageSize = 9;
+		int pageSize = 36;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -108,7 +108,7 @@ public class GoodsController {
 	public String stickerGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
 		System.out.println("stickerGO 상품창으로");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		int pageSize = 9;
+		int pageSize = 18;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -133,7 +133,7 @@ public class GoodsController {
 	public String caseGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
 		System.out.println("caseGO 상품창으로");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		int pageSize = 9;
+		int pageSize = 18;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -253,10 +253,12 @@ public class GoodsController {
 		String itemName = request.getParameter("itemName");
 		int count = Integer.parseInt(request.getParameter("count"));
 		int price = Integer.parseInt(request.getParameter("price"));
+		int itemIdx= Integer.parseInt(request.getParameter("itemIdx"));
 		
 		model.addAttribute("itemName", itemName);
 		model.addAttribute("count", count);
 		model.addAttribute("price", price);
+		model.addAttribute("itemIdx", itemIdx);
 		
 		return "/goods/order";
 	}
@@ -299,10 +301,15 @@ public class GoodsController {
 	
 	
 	@RequestMapping("/itemOrderDO")
-	public String itemOrderDO(HttpServletRequest request, Model model, HttpSession session, ItemOrderVO vo) {
+	public String itemOrderDO(HttpServletRequest request, Model model, HttpSession session, ItemOrderVO vo ) {
 		System.out.println("itemOrderDO 주문하기");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
+		System.out.println(vo);
+		vo.setItemIdx(Integer.parseInt(request.getParameter("itemIdx")));
+		vo.setCount(Integer.parseInt(request.getParameter("count")));
 		mapper.itemOrderDO(vo);
+		// 주문한 개수만큼 재고량 빼주기
+		mapper.decreaseStock(vo);
 		
 		return "/goods/completed";
 	}

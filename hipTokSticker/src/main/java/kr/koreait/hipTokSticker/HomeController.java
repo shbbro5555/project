@@ -43,7 +43,7 @@ public class HomeController {
 	public String itemGO(HttpServletRequest request, Model model, BoardList boardList, HttpSession session, GoodsVO vo) {
 		System.out.println("itemGO 상품창으로");
 		HipTokDAO mapper = sqlSession.getMapper(HipTokDAO.class);
-		int pageSize = 9;
+		int pageSize = 18;
 		int currentPage = 1;
 		try {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

@@ -21,7 +21,6 @@ html, body { width: 100%; height: 100%; }
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
 	<jsp:useBean id="date" class="java.util.Date"></jsp:useBean>
 
 	<h1 style="text-align: center; font-family: ">공지사항</h1>
@@ -119,5 +118,6 @@ html, body { width: 100%; height: 100%; }
 			<input type="button" value="＞＞" disabled="disabled" title="이미 마지막 페이지 입니다."/>
 		</c:if>
 	</div>
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html>

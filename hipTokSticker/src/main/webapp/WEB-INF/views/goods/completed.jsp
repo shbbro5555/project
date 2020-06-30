@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	구매완료!!^__^
+<%@include file="../include/header.jsp"%>
+
+	<div style="position: relative; left:45%; top:50%;">
+		<h1>구매완료!</h1>
+	</div>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

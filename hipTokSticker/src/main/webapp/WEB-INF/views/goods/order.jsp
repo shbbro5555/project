@@ -45,9 +45,11 @@
 	<div class=field2>
 		<div class=memberInfo style="position: relative;">
 				<form action="itemOrderDO" method="post">
+					<input type="hidden" name="count" value="${count}">								
+					<input type="hidden" name="itemIdx" value="${itemIdx}">								
+					<input type="hidden" name="itemName" value="${itemName}">								
 					<input type="hidden" name="userId" value="${member.userId}">								
 					<input type="hidden" name="userName" value="${member.userName}">
-					<input type="hidden" name="itemName" value="${itemName}">
 					<input type="hidden" name="itemidx" value="${itemIdx}">
 					<input type="hidden" name="price" value="${price}">								
 				<p>

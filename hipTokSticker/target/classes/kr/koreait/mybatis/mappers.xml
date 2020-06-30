@@ -443,9 +443,14 @@
 
 	<!-- 주문하기 -->
 	<insert id="itemOrderDO" parameterType="kr.koreait.vo.ItemOrderVO">
-		insert into itemOrder(idx, userId, userName, price, addressNum, address, phoneNum, email, request) 
-		values(itemorder_seq.nextval, #{userId}, #{userName}, #{price}, #{addressNum}, #{address}, #{phoneNum}, #{email}, #{request})
+		insert into itemOrder(idx, itemIdx, itemName, count, userId, userName, price, addressNum, address, phoneNum, email, request) 
+		values(itemorder_seq.nextval, #{itemIdx}, #{itemName}, #{count}, #{userId}, #{userName}, #{price}, #{addressNum}, #{address}, #{phoneNum}, #{email}, #{request})
 	</insert>
+	
+	<!-- 재고량 빼주기 -->
+	<update id="decreaseStock" parameterType="kr.koreait.vo.ItemOrderVO">
+		update goods set stock = stock - #{count} where idx = #{itemIdx}
+	</update>
 	
 	<!-- 마이페이지에 내가 주문한 상품 목록 보여주기 -->
 	<select id="showOrder" parameterType="String" resultType="kr.koreait.vo.ItemOrderVO">

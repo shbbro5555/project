@@ -45,7 +45,6 @@
 </head>
 <body>
 	<%@include file="../include/header.jsp"%>
-	<%@include file="../include/footer.jsp"%>
 		<c:if test="${member.kind =='manager'}">
 			<form action="noticeModifyGO" method="post" id="noticeModifyForm">
 				<input type="button" value="수정하기" id="noticeModifyBtn">	
@@ -101,7 +100,6 @@
 		</c:forEach>
 		</table>
 	</div>
-	
-	
+	<%@include file="../include/footer.jsp"%>
 </body>
 </html> 	

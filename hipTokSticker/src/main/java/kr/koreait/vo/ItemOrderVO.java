@@ -2,6 +2,9 @@ package kr.koreait.vo;
 
 public class ItemOrderVO {
 	private int idx;
+	private int itemIdx;
+	private int count;
+	private String itemName;
 	private String userId;
 	private String userName;
 	private String price;
@@ -18,6 +21,24 @@ public class ItemOrderVO {
 	}
 	public String getUserId() {
 		return userId;
+	}
+	public int getItemIdx() {
+		return itemIdx;
+	}
+	public void setItemIdx(int itemIdx) {
+		this.itemIdx = itemIdx;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -66,9 +87,10 @@ public class ItemOrderVO {
 	}
 	@Override
 	public String toString() {
-		return "ItemOrderVO [idx=" + idx + ", userId=" + userId + ", userName=" + userName + ", price=" + price
-				+ ", addressNum=" + addressNum + ", address=" + address + ", phoneNum=" + phoneNum + ", email=" + email
-				+ ", request=" + request + "]";
+		return "ItemOrderVO [idx=" + idx + ", itemIdx=" + itemIdx + ", count=" + count + ", itemName=" + itemName
+				+ ", userId=" + userId + ", userName=" + userName + ", price=" + price + ", addressNum=" + addressNum
+				+ ", address=" + address + ", phoneNum=" + phoneNum + ", email=" + email + ", request=" + request + "]";
 	}
+
 	
 }
