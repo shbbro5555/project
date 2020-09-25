@@ -38,7 +38,7 @@ public class BoardController {
 		@Autowired
 		SqlSession sqlSession;
 		HttpServletRequest request;
-	
+	//123123123123바바바
 /**
  * 
  * @param noticeGO(vo)	NoticeVO에서 vo를 받아와서 ArrayList형식으로 저장해서 페이지에 공지글을 띄웁니다.<br>
